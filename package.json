@@ -44,16 +44,19 @@
     "antd-mobile": "^5.0.0-rc.19",
     "axios": "^0.21.4",
     "history": "^5.3.0",
+    "i18next": "^24.2.3",
     "lib-flexible": "^0.3.2",
+    "mobx": "^6.13.7",
+    "mobx-react-lite": "^4.1.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-i18next": "^15.4.1",
     "react-router-dom": "^6.0.2",
-    "react-transition-group": "^4.4.2",
-    "rmox": "^1.0.6"
+    "react-transition-group": "^4.4.2"
   },
   "devDependencies": {
     "@testing-library/react": "^12.1.0",
-    "@types/node": "^16.9.1",
+    "@types/node": "^16.18.126",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
     "@types/react-transition-group": "^4.4.2",
@@ -89,6 +92,7 @@
     "typescript": "^4.3.2",
     "vite": "^4.2.1",
     "vite-plugin-compression2": "^0.8.2",
+    "vite-plugin-require-transform": "^1.0.21",
     "vite-plugin-style-import": "^2.0.0",
     "vite-plugin-windicss": "^1.8.10"
   }

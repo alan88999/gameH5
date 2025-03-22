@@ -1,0 +1,132 @@
+.container {
+  .userInfoContainer {
+    width: 400px;
+    height: 158px;
+    border-radius: 16px;
+    border: 0.4px solid rgba(255, 255, 255, 0.3);
+    background: #2c3746;
+    box-shadow: 6px 6px 12px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    margin: 14px auto;
+    .left {
+      display: flex;
+    }
+    .avatar {
+      width: 70px;
+      height: 70px;
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: 0.5px solid rgba(255, 255, 255, 0.3);
+      filter: drop-shadow(6px 6px 12px rgba(0, 0, 0, 0.25))
+        drop-shadow(-6px -6px 12px rgba(255, 255, 255, 0.25));
+    }
+    .text {
+      color: #5e7ca6;
+      font-family: Fredoka;
+      font-size: 10px;
+      font-weight: 500;
+    }
+    .idInfo {
+      display: flex;
+      flex-direction: column;
+      .idText {
+        width: 150px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        color: #fff;
+        font-family: Fredoka;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 27px;
+      }
+      .active {
+        width: max-content;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 9px;
+        padding: 5px 8px;
+        border-radius: 30px;
+        background: #0a742d;
+        color: #fff;
+        font-family: Lato;
+        font-size: 10px;
+      }
+    }
+    .balanceContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      .refreshIcon {
+        width: 25px;
+        height: 25px;
+        margin-bottom: 44px;
+        &.refreshing {
+          animation: refreshing 1s linear infinite;
+        }
+      }
+      .balance {
+        color: #fff;
+        font-family: 'Advent Pro';
+        font-size: 30px;
+        line-height: 36px;
+        font-weight: 700;
+      }
+    }
+  }
+  .listContainer {
+    .listItem {
+      width: 400px;
+      height: 65px;
+      padding: 0 16px 0 23px;
+      margin: 0 auto 16px;
+      border: 0.4px solid rgba(255, 255, 255, 0.3);
+      background: #1e3244;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .left {
+        display: flex;
+        align-items: center;
+        .icon {
+          margin-right: 13px;
+        }
+        .listText {
+          color: #fff;
+          font-family: Lato;
+          font-size: 16px;
+          font-weight: 700;
+        }
+      }
+      .arrow {
+        width: 31px;
+        height: 31px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        filter: drop-shadow(6px 6px 12px rgba(0, 0, 0, 0.25));
+        background: rgb(62, 69, 86);
+        border-radius: 50%;
+      }
+    }
+  }
+  @keyframes refreshing {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

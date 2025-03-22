@@ -2,15 +2,6 @@ import { memo } from 'react';
 import styles from './index.module.less';
 import image from '@/assets/images/search_tab.png';
 import { Button, Space } from 'antd-mobile';
-
-/*
- * @Descripttion:
- * @version:
- * @Author: 小白
- * @Date: 2020-10-05 16:52:36
- * @LastEditors: 小白
- * @LastEditTime: 2022-01-19 00:29:30
- */
 const Detail = () => {
   return (
     <div>

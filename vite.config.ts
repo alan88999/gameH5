@@ -1,6 +1,7 @@
 import proxy from './config/proxy';
 import { resolve } from 'path';
 import type { ConfigEnv, UserConfig } from 'vite';
+import requireTransform from 'vite-plugin-require-transform';
 import { loadEnv } from 'vite';
 import { VITE_DROP_CONSOLE, VITE_BASE_PATH } from './config/constant';
 import { createVitePlugins } from './config/plugins';
@@ -13,10 +14,16 @@ export default ({ command, mode }: ConfigEnv): UserConfig => {
   const { VITE_PORT, VITE_HTTP_API } = env;
 
   return {
+    assetsInclude: ['*.png'],
     root: process.cwd(),
     publicDir: 'public',
     base: VITE_BASE_PATH,
-    plugins: createVitePlugins(mode, isBuild),
+    plugins: [
+      createVitePlugins(mode, isBuild),
+      requireTransform({
+        fileRegex: /.ts$|.tsx$/, // 使用正则表达式匹配需要作用的文件
+      }),
+    ],
     css: {
       modules: {
         generateScopedName: '[name]__[local]___[hash:base64:5]',

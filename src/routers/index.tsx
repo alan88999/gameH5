@@ -15,6 +15,15 @@ const Detail = lazy(() => import(/* chunkName: Detail */ '@/pages/Detail'));
 const Index = lazy(() => import(/* chunkName: Index */ '@/pages/Index'));
 const Other = lazy(() => import(/* chunkName: Other */ '@/pages/Other'));
 const Other1 = lazy(() => import(/* chunkName: Other1 */ '@/pages/Other1'));
+const Login = lazy(() => import(/* chunkName: Other1 */ '@/pages/Login'));
+const Setting = lazy(() => import(/* chunkName: Setting */ '@/pages/Setting'));
+const DownlineDetail = lazy(() => import(/* chunkName: DownlineDetail */ '@/pages/DownlineDetail'));
+const DownlineLogs = lazy(() => import(/* chunkName: DownlineLogs */ '@/pages/DownlineLogs'));
+const DownlineManagement = lazy(() => import(/* chunkName: DownlineManagement */ '@/pages/DownlineManagement'));
+const GamePage = lazy(() => import(/* chunkName: GamePage */ '@/pages/GamePage'));
+const Password = lazy(
+  () => import(/* chunkName: Setting */ '@/pages/Password'),
+);
 const NoFound = lazy(
   () => import(/* chunkName: NoFound */ '../components/NoFound'),
 );
@@ -24,28 +33,28 @@ export const TabBarList: White.RouteTabBar[] = [
     component: Home,
     icon: 'white-home1',
     sceneMode: 'scroll',
-    title: '首页',
+    title: 'GameLog',
   },
   {
-    path: '/detail',
+    path: '/support',
     component: Detail,
     icon: 'white-tradingdata',
     sceneMode: 'scroll',
-    title: '详情',
+    title: 'Support',
   },
   {
     path: '/list',
     component: List,
     icon: 'white-order',
     sceneMode: 'scroll',
-    title: '统计',
+    title: 'Downline',
   },
   {
-    path: '/search',
-    component: Search,
+    path: '/setting',
+    component: Setting,
     icon: 'white-account',
     sceneMode: 'scroll',
-    title: '我的',
+    title: 'Setting',
   },
 ];
 
@@ -67,6 +76,34 @@ const routes: White.RouteConfig[] = [
   {
     path: '/dcotorDetail',
     component: Detail,
+  },
+  {
+    path: '/login',
+    component: Login,
+  },
+  {
+    path: '/setting',
+    component: Setting,
+  },
+  {
+    path: '/password',
+    component: Password,
+  },
+  {
+    path: '/downlineDetail',
+    component: DownlineDetail,
+  },
+  {
+    path: '/downlineLogs',
+    component: DownlineLogs,
+  },
+  {
+    path: '/downlineManagement',
+    component: DownlineManagement,
+  },
+  {
+    path: '/gamePage',
+    component: GamePage,
   },
   {
     path: '*',

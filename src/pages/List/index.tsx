@@ -1,11 +1,3 @@
-/*
- * @Descripttion:
- * @version:
- * @Author: 小白
- * @Date: 2020-10-05 20:44:54
- * @LastEditors: 小白
- * @LastEditTime: 2022-01-19 00:23:48
- */
 import useAxios from '@/hooks/useAxios';
 import { Space, Badge, NoticeBar } from 'antd-mobile';
 import Axios from 'axios';

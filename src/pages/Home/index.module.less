@@ -1,0 +1,138 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 11px 16px;
+    background: #0a1523;
+    .left {
+      display: flex;
+      align-items: center;
+      .menu {
+        margin-right: 19px;
+      }
+      .logo {
+        width: 82px;
+      }
+    }
+  }
+  .content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    height: calc(100% - 97px);
+    padding: 16px 0 16px 11px;
+    .topHeader {
+      .filterContainer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-right: 11px;
+        .search {
+          width: 288px;
+          .searchInput {
+            width: 288px;
+          }
+        }
+        .sort {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 100px;
+          height: 40px;
+          background: #10141f;
+          border-radius: 8px;
+          span {
+            color: #fff;
+            font-family: Lato;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 0 16px 0 5px;
+          }
+          .arrowIcon {
+            transition: all ease 0.3s;
+            &.desc {
+              transform: rotate(180deg);
+            }
+          }
+        }
+      }
+      .category {
+        margin-top: 11px;
+        display: flex;
+        align-items: center;
+        overflow-x: auto;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        .categoryItem {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          white-space: nowrap;
+          height: 30px;
+          padding: 0 12px;
+          background: #12698b;
+          border-radius: 8px;
+          color: #fff;
+          font-family: Lato;
+          font-size: 14px;
+          font-weight: 500;
+          margin-right: 12px;
+          &.active {
+            background: linear-gradient(to right, #ff006b, #fa9700);
+          }
+          img {
+            width: 20px;
+            margin-right: 6px;
+          }
+        }
+      }
+    }
+    .gameListConatiner {
+      flex: 1;
+      padding-right: 11px;
+      padding-left: 3px;
+      padding-top: 12px;
+
+      .gameList {
+        .gameTitle {
+          color: #dbdbdb;
+          font-family: Fredoka;
+          font-size: 18px;
+          font-weight: 500;
+          padding: 17px 0;
+        }
+        .gameUl {
+          display: flex;
+          flex-wrap: wrap;
+          overflow-y: auto;
+          &::-webkit-scrollbar {
+            display: none;
+          }
+          .gameItem {
+            width: 122px;
+            margin-right: 19px;
+            margin-top: 12px;
+            &:nth-child(1),
+            &:nth-child(2),
+            &:nth-child(3){
+              margin-top: 0;
+            }
+
+            &:nth-child(3n) {
+              margin-right: 0;
+            }
+            .gameLogo {
+              width: 100%;
+              border-radius: 18px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

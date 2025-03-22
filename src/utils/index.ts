@@ -76,3 +76,54 @@ export const setWindowHeight = () => {
     .getElementsByTagName('body')[0]
     .style.setProperty('--height-primary', `${windowHeight}px`);
 };
+/**
+ * 解构react的className数组
+ * @param className
+ */
+export function reactClassNameJoin(...className: any) {
+  return className.join(' ');
+}
+
+/**
+ * 格式化余额
+ * @param val
+ * @returns
+ */
+export const formatBalance = (val: any) => {
+  return Number(val / 1000).toFixed(2);
+};
+
+export const getToken = () => {
+  return localStorage.getItem('token');
+};
+
+export const formatGameId = (id: number) => {
+  return id < 10 ? `00${id}` : id < 100 ? `0${id}` : id;
+};
+
+/**
+ * 获取url参数
+ * @param {String} paraName
+ */
+export const getUrlParams = (paraName: string, urlParams?: string) => {
+  let url = '';
+  try {
+    url = urlParams ? urlParams : document.location.toString();
+  } catch (error) {
+    //
+  }
+  const arrObj = url.split('?');
+  if (arrObj.length > 1) {
+    const arrPara = arrObj[1].split('&');
+    let arr: any;
+    for (let i = 0; i < arrPara.length; i++) {
+      arr = arrPara[i].split('=', 2);
+      if (arr != null && arr[0] === paraName) {
+        return arr[1];
+      }
+    }
+    return '';
+  } else {
+    return '';
+  }
+};

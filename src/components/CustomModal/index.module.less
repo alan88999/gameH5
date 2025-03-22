@@ -1,0 +1,42 @@
+.modal {
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .contentDesc {
+      color: #fff;
+      font-family: Lato;
+      font-size: 14px;
+      line-height: 20px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .contentInner {
+      width: 226px;
+      color: #fff;
+      text-align: center;
+      font-family: Lato;
+      font-size: 18px;
+      line-height: 22px;
+      font-style: normal;
+      font-weight: 700;
+    }
+  }
+  .footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .confirmBtn,
+    .cancelBtn {
+      width: 127px;
+    }
+  }
+  :global {
+    .adm-center-popup-body {
+      width: 331px;
+      border-radius: 16px;
+      background: #2c3746;
+      box-shadow: 6px 6px 12px 0px rgba(0, 0, 0, 0.25);
+    }
+  }
+}

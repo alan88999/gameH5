@@ -4,7 +4,7 @@ module.exports = {
     require('tailwindcss'),
     require('autoprefixer'),
     px2rem({
-      rootValue: 75,
+      rootValue: 43,
       unitPrecision: 5,
       propList: ['*'],
       exclude: /node_modules/,

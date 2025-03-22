@@ -5,6 +5,7 @@
     "moduleResolution": "Node",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "types": ["vite/client", "node"],
+    "typeRoots": ["./node_modules"],
     "allowJs": true,
     "skipLibCheck": false,
     "esModuleInterop": false,
