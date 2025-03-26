@@ -6,7 +6,7 @@ import { reactClassNameJoin } from '@/utils';
 
 interface Props extends ModalProps {
   content: any;
-  contentDesc?: string;
+  contentDesc?: any;
   icon?: string;
   contentInnerClassName?: string;
   footer?: {

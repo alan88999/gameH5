@@ -1,3 +1,76 @@
 .container {
+  width: 100%;
+  .content {
+    width: 100%;
+    height: calc(100% - 68px);
+    padding: 0 15px;
+    .userinfo {
+      display: flex;
+      .info {
+        display: flex;
+        flex-direction: column;
+        padding-top: 15px;
 
+        .text {
+          color: #5e7ca6;
+          font-family: Fredoka;
+          font-size: 10px;
+          font-weight: 500;
+        }
+        .id {
+          color: #fff;
+          font-family: Fredoka;
+          line-height: 28px;
+          font-size: 22px;
+          font-weight: 500;
+        }
+        .active {
+          width: max-content;
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 9px;
+          padding: 5px 8px;
+          border-radius: 30px;
+          background: #0a742d;
+          color: #fff;
+          font-family: Lato;
+          font-size: 10px;
+          &.inactive {
+            background: red;
+          }
+        }
+      }
+    }
+    .typeTab {
+      display: flex;
+      align-items: center;
+      border-radius: 64px;
+      background: #0a1523;
+      margin-top: 5px;
+      .tabItem {
+        width: 50%;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        text-align: center;
+        font-family: Jomhuria;
+        font-size:18px;
+        font-weight: 400;
+        &.active {
+          color: #fff;
+          border-radius: 44px;
+          background: #12698b;
+          box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.25);
+        }
+      }
+    }
+    .listContainer {
+        width: 100%;
+        height: calc(100% - 100px);
+    }
+  }
 }

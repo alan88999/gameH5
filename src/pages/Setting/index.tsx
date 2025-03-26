@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import Header from '@/components/header';
 import styles from './index.module.less';
 import globalStore from '@/store/global.store';
-import { reactClassNameJoin } from '@/utils';
+import { formatBalance, reactClassNameJoin } from '@/utils';
 import CustoModal from '@/components/CustomModal';
 import history from '@/utils/history';
 import { logout } from '@/services/api';
@@ -52,7 +52,12 @@ const Setting = () => {
   };
   return (
     <div className={styles.container}>
-      <Header title="Setting" />
+      <Header
+        title="Setting"
+        onBack={() => {
+          history.replace('/');
+        }}
+      />
       <div className={styles.userInfoContainer}>
         <div className={styles.left}>
           <div className={styles.avatar}>
@@ -79,7 +84,9 @@ const Setting = () => {
             }}
           />
           <div className={styles.text}>Agent Credit (BDT)</div>
-          <div className={styles.balance}>{userInfo.agent_balance}</div>
+          <div className={styles.balance}>
+            {formatBalance(userInfo.agent_balance)}
+          </div>
         </div>
       </div>
       <div className={styles.listContainer}>

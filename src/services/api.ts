@@ -54,3 +54,49 @@ export async function gameEnter(params: any) {
 export async function gameExit(params: any) {
   return service.post('/bo/api/v1/games/exit', params);
 }
+
+/** 获取游戏日志 POST /order/search/ */
+export async function getGameLogs(params: any) {
+  return service.post('/bo/api/v1/order/search', params);
+}
+
+/** 获取下线 POST /user/query/downs/ */
+export async function getDownUsers() {
+  return service.post('/bo/api/v1/user/query/downs');
+}
+
+/** 转账 POST /user/transfer/ */
+export async function transfer(params: any) {
+  return service.post('/bo/api/v1/user/transfer',params);
+}
+
+/** 获取用户详情 POST /user/query/userInfo/ */
+export async function queryUserinfo(params: any) {
+  return service.post('/bo/api/v1/user/query/userInfo',params);
+}
+
+
+/** 修改用户状态 POST /user/modify/status/ */
+export async function modifyStatus(params: any) {
+  return service.post('/bo/api/v1/user/modify/status',params);
+}
+
+/** 获取交易记录 POST /transaction/list/ */
+export async function transactionList(params: any) {
+  return service.post('/bo/api/v1/transaction/list',params);
+}
+
+/** 获取游戏记录 POST /order/queryByUsername/ */
+export async function queryGameByUsername(params: any) {
+  return service.post('/bo/api/v1/order/queryByUsername',params);
+}
+
+/** 获取Ip log POST /user/list/ */
+export async function queryIPLog(params: any) {
+  return service.post('/bo/api/v1/user/list',params);
+}
+
+/** 新增下线 POST /user/register */
+export async function addNewUser(params: any) {
+  return service.post('/bo/api/v1/user/register', params);
+}

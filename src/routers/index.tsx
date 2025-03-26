@@ -8,8 +8,6 @@
  */
 import { White } from '@/typings';
 import { lazy } from 'react';
-const Search = lazy(() => import(/* chunkName: "Search" */ '@/pages/Search'));
-const List = lazy(() => import(/* chunkName: List */ '@/pages/List'));
 const Home = lazy(() => import(/* chunkName: Home */ '@/pages/Home'));
 const Detail = lazy(() => import(/* chunkName: Detail */ '@/pages/Detail'));
 const Index = lazy(() => import(/* chunkName: Index */ '@/pages/Index'));
@@ -17,20 +15,33 @@ const Other = lazy(() => import(/* chunkName: Other */ '@/pages/Other'));
 const Other1 = lazy(() => import(/* chunkName: Other1 */ '@/pages/Other1'));
 const Login = lazy(() => import(/* chunkName: Other1 */ '@/pages/Login'));
 const Setting = lazy(() => import(/* chunkName: Setting */ '@/pages/Setting'));
-const DownlineDetail = lazy(() => import(/* chunkName: DownlineDetail */ '@/pages/DownlineDetail'));
-const DownlineLogs = lazy(() => import(/* chunkName: DownlineLogs */ '@/pages/DownlineLogs'));
-const DownlineManagement = lazy(() => import(/* chunkName: DownlineManagement */ '@/pages/DownlineManagement'));
-const GamePage = lazy(() => import(/* chunkName: GamePage */ '@/pages/GamePage'));
+const GameLog = lazy(() => import(/* chunkName: GameLog */ '@/pages/GameLog'));
+const DownlineDetail = lazy(
+  () => import(/* chunkName: DownlineDetail */ '@/pages/DownlineDetail'),
+);
+const DownlineLogs = lazy(
+  () => import(/* chunkName: DownlineLogs */ '@/pages/DownlineLogs'),
+);
+const DownlineManagement = lazy(
+  () =>
+    import(/* chunkName: DownlineManagement */ '@/pages/DownlineManagement'),
+);
+const GamePage = lazy(
+  () => import(/* chunkName: GamePage */ '@/pages/GamePage'),
+);
 const Password = lazy(
   () => import(/* chunkName: Setting */ '@/pages/Password'),
+);
+const AddUser = lazy(
+  () => import(/* chunkName: AddAgent */ '@/pages/AddUser'),
 );
 const NoFound = lazy(
   () => import(/* chunkName: NoFound */ '../components/NoFound'),
 );
 export const TabBarList: White.RouteTabBar[] = [
   {
-    path: '/',
-    component: Home,
+    path: '/gameLog',
+    component: GameLog,
     icon: 'white-home1',
     sceneMode: 'scroll',
     title: 'GameLog',
@@ -43,8 +54,8 @@ export const TabBarList: White.RouteTabBar[] = [
     title: 'Support',
   },
   {
-    path: '/list',
-    component: List,
+    path: '/downlineManagement',
+    component: DownlineManagement,
     icon: 'white-order',
     sceneMode: 'scroll',
     title: 'Downline',
@@ -61,8 +72,7 @@ export const TabBarList: White.RouteTabBar[] = [
 const routes: White.RouteConfig[] = [
   {
     path: '/',
-    component: Index,
-    tabBars: TabBarList,
+    component: Home,
   },
   {
     path: '/other',
@@ -90,6 +100,10 @@ const routes: White.RouteConfig[] = [
     component: Password,
   },
   {
+    path: '/gameLog',
+    component: GameLog,
+  },
+  {
     path: '/downlineDetail',
     component: DownlineDetail,
   },
@@ -104,6 +118,10 @@ const routes: White.RouteConfig[] = [
   {
     path: '/gamePage',
     component: GamePage,
+  },
+  {
+    path: '/addNewUser',
+    component: AddUser,
   },
   {
     path: '*',

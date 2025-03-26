@@ -4,6 +4,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 const globalStore = makeAutoObservable({
   userInfo: {
     id:0,
+    currency_id: 0,
     nickname:'nickname',
     username:'username',
     game_balance: 0,
@@ -11,6 +12,7 @@ const globalStore = makeAutoObservable({
     master_count: 0,
     wechat: '',
     whats_app:'',
+    prefix: '',
   } ,
   refreshing: false,
   setUserInfo: (val: any) => {

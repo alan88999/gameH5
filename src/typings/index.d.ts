@@ -19,6 +19,7 @@ export namespace White {
     icon: string;
     title: string;
   };
+  // @ts-ignore
   export interface RouteConfig extends RouteProps {
     routes?: RouteConfig[]; // 子列表
     tabBars?: (RouteConfig & TabBarType)[];

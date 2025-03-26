@@ -30,7 +30,12 @@ service.interceptors.response.use(
     const res = response;
     // 根据你的业务处理回调
     if (res.data.code !== 200) {
-      if (res.data.code === 2005 || res.data.code === 2006 || res.data.code === 204) {
+      if (
+        res.data.code === 2003 ||
+        res.data.code === 2004 ||
+        res.data.code === 2005 ||
+        res.data.code === 2006
+      ) {
         localStorage.removeItem('token');
         window.location.href = '/login';
       }
@@ -41,6 +46,7 @@ service.interceptors.response.use(
     }
   },
   (error) => {
+    console.log(error);
     return Promise.reject(error);
   },
 );

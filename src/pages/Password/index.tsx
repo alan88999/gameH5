@@ -5,15 +5,19 @@ import Button from '@/components/button';
 import styles from './index.module.less';
 import { changePassword } from '@/services/api';
 import CustomInput from '@/components/input';
+import CustoModal from '@/components/CustomModal';
 import history from '@/utils/history';
 import globalStore from '@/store/global.store';
 import { Toast } from 'antd-mobile';
+import { getUrlParams } from '@/utils';
 
 const Pssword = () => {
+  const id = Number(getUrlParams('id'));
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
   const { userInfo } = globalStore;
 
   const changePasswordReq = () => {
@@ -27,21 +31,25 @@ const Pssword = () => {
       return;
     }
     setLoading(true);
-    changePassword({
+    let params: any = {
       user_id: userInfo.id,
-      current_password: currentPassword,
       password: newPassword,
-    })
+    };
+    if (id) {
+      params.user_id = id;
+    } else {
+      params.current_password = currentPassword;
+    }
+    changePassword(params)
       .then((res) => {
         setTimeout(() => {
           setLoading(false);
           if (res.data.code === 200) {
-            Toast.show({
-              content: 'Change Successfully',
-              afterClose: () => {
-                history.go(-1);
-              },
-            });
+            setVisible(true);
+            setTimeout(() => {
+              setVisible(false);
+              history.go(-1);
+            }, 2000);
           } else {
             Toast.show({
               content: res.data.msg,
@@ -67,17 +75,21 @@ const Pssword = () => {
         Please insert your new password and confirm the password.
       </div>
       <div className={styles.form}>
-        <div className={styles.inputContainer}>
-          <CustomInput
-            type="password"
-            value={currentPassword}
-            icon={require('../Login/img/icon-password.png')}
-            placeholder="Current Password"
-            onChange={(val) => {
-              setCurrentPassword(val);
-            }}
-          />
-        </div>
+        {id ? (
+          ''
+        ) : (
+          <div className={styles.inputContainer}>
+            <CustomInput
+              type="password"
+              value={currentPassword}
+              icon={require('../Login/img/icon-password.png')}
+              placeholder="Current Password"
+              onChange={(val) => {
+                setCurrentPassword(val);
+              }}
+            />
+          </div>
+        )}
         <div className={styles.inputContainer}>
           <CustomInput
             value={newPassword}
@@ -104,7 +116,9 @@ const Pssword = () => {
       <div className={styles.btnContainer}>
         <Button
           loading={loading}
-          disabled={!confirmPassword || !currentPassword || !newPassword}
+          disabled={
+            !confirmPassword || (id ? false : !currentPassword) || !newPassword
+          }
           className={styles.confirmBtn}
           onClick={changePasswordReq}>
           Confirm
@@ -117,6 +131,19 @@ const Pssword = () => {
           Cancel
         </Button>
       </div>
+      <CustoModal
+        visible={visible}
+        icon={require('../DownlineDetail/img/modal-password-done.png')}
+        closeOnMaskClick
+        onClose={() => {
+          setVisible(false);
+          history.go(-1);
+        }}
+        content={'It’s done!'}
+        contentDesc={
+          'Your password has been changed successfully for this player.'
+        }
+      />
     </div>
   );
 };

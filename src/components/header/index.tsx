@@ -4,15 +4,16 @@ import styles from './index.module.less';
 interface Props {
   title: string;
   right?: any;
+  onBack?: () => void;
 }
 const Header = (props: Props) => {
-  const { title, right } = props;
+  const { title, right, onBack } = props;
   return (
     <div className={styles.header}>
       <div
         className={styles.left}
         onClick={() => {
-          history.go(-1);
+          onBack ? onBack() : history.go(-1);
         }}>
         <img src={require('./img/btn-back.png')} />
       </div>

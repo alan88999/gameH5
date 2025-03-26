@@ -1,3 +1,196 @@
 .container {
+  width: 100%;
+  .content {
+    width: 100%;
+    padding: 14px 15px;
+    max-height: calc(100% - 68px);
+    overflow-y: auto;
+    .infoContainer {
+      width: 400px;
+      height: 212px;
+      padding: 0 18px;
+      border-radius: 16px;
+      border: 0.4px solid rgba(255, 255, 255, 0.3);
+      background: #2c3746;
+      box-shadow: 6px 6px 12px 0px rgba(0, 0, 0, 0.25);
+      position: relative;
+      .userinfo {
+        display: flex;
 
+        .info {
+          display: flex;
+          flex-direction: column;
+          padding-top: 15px;
+
+          .text {
+            color: #5e7ca6;
+            font-family: Fredoka;
+            font-size: 10px;
+            font-weight: 500;
+          }
+          .id {
+            color: #fff;
+            font-family: Fredoka;
+            line-height: 28px;
+            font-size: 22px;
+            font-weight: 500;
+          }
+          .active {
+            width: max-content;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 9px;
+            padding: 5px 8px;
+            border-radius: 30px;
+            background: #0a742d;
+            color: #fff;
+            font-family: Lato;
+            font-size: 10px;
+            &.inactive {
+              background: red;
+            }
+          }
+        }
+      }
+      .balanceContainer {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        .loadingIcon {
+          &.loading {
+            animation: loadingKF 1s linear infinite;
+          }
+        }
+        .text {
+          margin-top: 30px;
+          color: #5e7ca6;
+          text-align: right;
+          font-family: Fredoka;
+          font-size: 10px;
+          font-weight: 500;
+        }
+        .balance {
+          color: #fff;
+          text-align: right;
+          font-family: 'Advent Pro';
+          font-size: 30px;
+          font-weight: 700;
+        }
+      }
+      .operate {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 40px;
+        .topup {
+          width: 180px;
+          height: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+          text-align: center;
+          font-family: Lato;
+          font-size: 16px;
+          font-weight: 700;
+          background-image: url(./img/btn-topup.png);
+          background-size: 100% 100%;
+          img {
+            margin-right: 12px;
+          }
+        }
+        .withdraw {
+          width: 180px;
+          height: 44px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #fff;
+          text-align: center;
+          font-family: Lato;
+          font-size: 16px;
+          font-weight: 700;
+          background-image: url(./img/btn-withdraw.png);
+          background-size: 100% 100%;
+        }
+      }
+    }
+    .accountOperate {
+      display: flex;
+      flex-wrap: wrap;
+      .operateItem {
+        margin-top: 12px;
+        width: 194px;
+        height: 86px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 16px;
+        border: 0.4px solid rgba(255, 255, 255, 0.3);
+        background: #1e3244;
+        margin-right: 12px;
+        &:nth-child(2n) {
+          margin-right: 0;
+        }
+        span {
+          margin-top: 5px;
+          color: #fff;
+          text-align: center;
+          font-family: Lato;
+          font-size: 12px;
+          font-weight: 700;
+        }
+      }
+    }
+    .logConatiner {
+      .logItem {
+        margin-top: 12px;
+        width: 400px;
+        height: 65px;
+        padding: 0 0 0 25px;
+        border-radius: 10px;
+        border: 0.4px solid rgba(255, 255, 255, 0.3);
+        background: #1e3244;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .left {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          span:first-child {
+            color: #fff;
+            font-family: Lato;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: normal;
+          }
+          span:last-child {
+            color: rgba(255, 255, 255, 0.5);
+            font-family: Fredoka;
+            font-size: 12px;
+            font-weight: 400;
+          }
+        }
+        img {
+          margin-top: 18px;
+        }
+      }
+    }
+  }
+  @keyframes loadingKF {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
 }
