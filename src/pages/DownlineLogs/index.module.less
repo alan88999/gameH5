@@ -6,10 +6,15 @@
     padding: 0 15px;
     .userinfo {
       display: flex;
+      height: 89px;
+      .avatar {
+        margin-right: 5px;
+        margin-top: 10px;
+      }
       .info {
         display: flex;
         flex-direction: column;
-        padding-top: 15px;
+        padding-top: 8px;
 
         .text {
           color: #5e7ca6;
@@ -49,6 +54,7 @@
       border-radius: 64px;
       background: #0a1523;
       margin-top: 5px;
+      margin-bottom: 16px;
       .tabItem {
         width: 50%;
         height: 44px;
@@ -58,7 +64,7 @@
         color: #fff;
         text-align: center;
         font-family: Jomhuria;
-        font-size:18px;
+        font-size: 18px;
         font-weight: 400;
         &.active {
           color: #fff;
@@ -69,8 +75,63 @@
       }
     }
     .listContainer {
-        width: 100%;
-        height: calc(100% - 100px);
+      width: 100%;
+      height: calc(100% - 180px);
+      .listInner {
+        max-height: calc(100% - 90px);
+        border-radius: 12px;
+        border: 0.4px solid rgba(255, 255, 255, 0.3);
+        box-shadow: 6px 6px 12px 0px rgba(0, 0, 0, 0.25);
+        overflow-y: auto;
+        .listItem {
+          height: 60px;
+          border-bottom: 0.4px solid rgba(255, 255, 255, 0.3);
+          background: #213c54;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0 12px;
+          &:first-child {
+            border-radius: 12px 12px 0 0;
+          }
+          &:last-child {
+            border-radius: 0 0 12px 12px;
+          }
+          .left {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            .title {
+              color: #fcfcfc;
+              font-family: Lato;
+              font-size: 16px;
+              font-weight: 400;
+            }
+            .time {
+              color: #a7a7a7;
+              font-family: Lato;
+              font-size: 12px;
+              font-weight: 400;
+            }
+          }
+          .right {
+            color: #fff;
+            text-align: right;
+            font-family: Lato;
+            font-size: 16px;
+            font-weight: 700;
+            &.add {
+              color: #35d668;
+            }
+            &.minus {
+              color: #d65e35;
+            }
+          }
+          &:last-child {
+            border: 0;
+          }
+        }
+      }
     }
   }
 }

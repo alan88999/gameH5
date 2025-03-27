@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import Header from '@/components/header';
+import Avatar from '@/components/Avatar';
 import styles from './index.module.less';
 import globalStore from '@/store/global.store';
 import { formatBalance, reactClassNameJoin } from '@/utils';
@@ -25,12 +26,15 @@ const Setting = () => {
       .then((res) => {
         if (res.data.code === 200) {
           setModalProps({
+            ...modalProps,
+            icon: require('../DownlineDetail/img/modal-logout-done.png'),
             visible: true,
             content: 'Account Logged Out!',
             contentDesc: 'This account has been successfully force logged out.',
           });
           setTimeout(() => {
             setModalProps({
+              ...modalProps,
               visible: false,
               content: 'Account Logged Out!',
               contentDesc:
@@ -61,7 +65,7 @@ const Setting = () => {
       <div className={styles.userInfoContainer}>
         <div className={styles.left}>
           <div className={styles.avatar}>
-            <img />
+            <Avatar userinfo={userInfo} />
           </div>
           <div className={styles.idInfo}>
             <div className={styles.text}>Player ID</div>
@@ -69,7 +73,13 @@ const Setting = () => {
               className={
                 styles.idText
               }>{`${userInfo.username}/${userInfo.id}`}</div>
-            <div className={styles.active}>Active</div>
+            <div
+              className={reactClassNameJoin(
+                styles.active,
+                userInfo?.status === 2 ? styles.inactive : '',
+              )}>
+              {userInfo.status === 1 ? 'Active' : 'Inactive'}
+            </div>
           </div>
         </div>
         <div className={styles.balanceContainer}>
@@ -104,7 +114,7 @@ const Setting = () => {
           </div>
           <div className={styles.arrow}>
             <img
-              src={require('./img/icon-changePassword.png')}
+              src={require('../DownlineDetail/img/btn-next.png')}
               className={styles.icon}
             />
           </div>
@@ -113,6 +123,8 @@ const Setting = () => {
           className={styles.listItem}
           onClick={() => {
             setModalProps({
+              ...modalProps,
+              icon: require('../DownlineDetail/img/modal-logout.png'),
               visible: true,
               content: 'Are you sure to force-logout this account?',
               footer: {
@@ -135,7 +147,7 @@ const Setting = () => {
           </div>
           <div className={styles.arrow}>
             <img
-              src={require('./img/icon-changePassword.png')}
+              src={require('../DownlineDetail/img/btn-next.png')}
               className={styles.icon}
             />
           </div>

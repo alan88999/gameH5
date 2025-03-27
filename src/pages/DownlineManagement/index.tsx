@@ -51,7 +51,7 @@ const DownlineManagement = () => {
                 setIsTopUp(true);
                 setVisible(true);
               }}>
-              <img src={require('./img/btn-add.png')} />
+              <img className={styles.icon} src={require('./img/btn-add.png')} />
             </div>
             <div
               className={styles.btn}
@@ -60,14 +60,14 @@ const DownlineManagement = () => {
                 setIsTopUp(false);
                 setVisible(true);
               }}>
-              <img src={require('./img/btn-minus.png')} />
+              <img className={styles.icon} src={require('./img/btn-minus.png')} />
             </div>
             <div
               className={styles.btn}
               onClick={() => {
                 history.push(`/downlineDetail?id=${item.id}&type=${type}`);
               }}>
-              <img src={require('./img/btn-more.png')} />
+              <img className={styles.icon} src={require('./img/btn-more.png')} />
             </div>
           </div>
         </div>

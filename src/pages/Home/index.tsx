@@ -103,10 +103,11 @@ const Home = () => {
     );
   };
   const renderGameList = () => {
+    console.log(categoryCurrent);
     return (
       <div className={styles.gameList}>
         <div className={styles.gameTitle}>
-          {CategoriesMap[categoryCurrent.category]} Games
+          {CategoriesMap[categoryCurrent.type]} Games
         </div>
         <div className={styles.gameUl}>
           {gameList.map((item: any, index: number) => {

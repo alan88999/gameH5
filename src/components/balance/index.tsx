@@ -1,9 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useTranslation } from 'react-i18next';
 import globalStore from '@/store/global.store';
 import styles from './index.module.less';
 import { formatBalance, getToken } from '@/utils';
+import Avatar from '../Avatar';
 import { getCurrentUserInfo } from '@/services/api';
 
 const Balance = () => {
@@ -30,7 +31,7 @@ const Balance = () => {
         </div>
       </div>
       <div className={styles.right}>
-        <img className={styles.avatar} />
+        <Avatar userinfo={userInfo} className={styles.avatar}/>
       </div>
     </div>
   );

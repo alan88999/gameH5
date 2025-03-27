@@ -91,9 +91,9 @@ export async function queryGameByUsername(params: any) {
   return service.post('/bo/api/v1/order/queryByUsername',params);
 }
 
-/** 获取Ip log POST /user/list/ */
+/** 获取Ip log POST /user/log/ */
 export async function queryIPLog(params: any) {
-  return service.post('/bo/api/v1/user/list',params);
+  return service.post('/bo/api/v1/user/log',params);
 }
 
 /** 新增下线 POST /user/register */

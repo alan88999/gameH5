@@ -4,6 +4,7 @@ import { makeAutoObservable, runInAction } from 'mobx';
 const globalStore = makeAutoObservable({
   userInfo: {
     id:0,
+    status: 1,
     currency_id: 0,
     nickname:'nickname',
     username:'username',

@@ -9,6 +9,7 @@ import { formatBalance, getUrlParams, reactClassNameJoin } from '@/utils';
 import CustoModal from '@/components/CustomModal';
 import history from '@/utils/history';
 import styles from './index.module.less';
+import Avatar from '@/components/Avatar';
 
 const DownlineDetail = () => {
   const id = Number(getUrlParams('id'));
@@ -198,7 +199,7 @@ const DownlineDetail = () => {
         <div className={styles.infoContainer}>
           <div className={styles.userinfo}>
             <div className={styles.avatar}>
-              <img src={require('./img/avatar.png')} />
+              <Avatar userinfo={userinfo?.user_info}/>
             </div>
             <div className={styles.info}>
               <span className={styles.text}>Player ID</span>
