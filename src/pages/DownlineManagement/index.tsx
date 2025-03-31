@@ -81,7 +81,7 @@ const DownlineManagement = () => {
         onBack={() => {
           history.replace('/');
         }}
-        right={<Balance />}
+        right={<Balance isAgent/>}
       />
       <div className={styles.content}>
         <div className={styles.filterContainer}>
