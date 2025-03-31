@@ -25,8 +25,8 @@ const DownlineLogs = () => {
     size: 10,
   });
   const [list, setList] = useState([]);
-  const [start, setStart] = useState(new Date());
-  const [end, setEnd] = useState(new Date());
+  const [start] = useState(dayjs().subtract(30, 'd'));
+  const [end] = useState(new Date());
   const [userinfo, setUserinfo] = useState({
     bet_start: '',
     user_info: {
@@ -117,7 +117,7 @@ const DownlineLogs = () => {
               : 'IP';
           const text3 =
             type === 1
-              ? `${item.transfer_type === 1 ? '+' : '-'}${formatBalance(
+              ? `${item.transfer_type === 1 ? '+' : ''}${formatBalance(
                   item.amount || 0,
                 )}`
               : type === 2

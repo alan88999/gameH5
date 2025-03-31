@@ -21,6 +21,7 @@ const TimePicker = (props: Props) => {
         />
       </div>
       <DatePicker
+        className={styles.datePicker}
         value={value}
         visible={visible}
         onCancel={() => setVisible(false)}

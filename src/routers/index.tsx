@@ -9,11 +9,8 @@
 import { White } from '@/typings';
 import { lazy } from 'react';
 const Home = lazy(() => import(/* chunkName: Home */ '@/pages/Home'));
-const Detail = lazy(() => import(/* chunkName: Detail */ '@/pages/Detail'));
 const Index = lazy(() => import(/* chunkName: Index */ '@/pages/Index'));
-const Other = lazy(() => import(/* chunkName: Other */ '@/pages/Other'));
-const Other1 = lazy(() => import(/* chunkName: Other1 */ '@/pages/Other1'));
-const Login = lazy(() => import(/* chunkName: Other1 */ '@/pages/Login'));
+const Login = lazy(() => import(/* chunkName: Login */ '@/pages/Login'));
 const Setting = lazy(() => import(/* chunkName: Setting */ '@/pages/Setting'));
 const GameLog = lazy(() => import(/* chunkName: GameLog */ '@/pages/GameLog'));
 const DownlineDetail = lazy(
@@ -42,28 +39,28 @@ export const TabBarList: White.RouteTabBar[] = [
   {
     path: '/gameLog',
     component: GameLog,
-    icon: 'white-home1',
+    icon: require('../components/Footer/img/btn-gamelog.png'),
     sceneMode: 'scroll',
     title: 'GameLog',
   },
   {
     path: '/support',
-    component: Detail,
-    icon: 'white-tradingdata',
+    component: GameLog,
+    icon: require('../components/Footer/img/btn-support.png'),
     sceneMode: 'scroll',
     title: 'Support',
   },
   {
     path: '/downlineManagement',
     component: DownlineManagement,
-    icon: 'white-order',
+    icon: require('../components/Footer/img/btn-downline.png'),
     sceneMode: 'scroll',
     title: 'Downline',
   },
   {
     path: '/setting',
     component: Setting,
-    icon: 'white-account',
+    icon: require('../components/Footer/img/btn-setting.png'),
     sceneMode: 'scroll',
     title: 'Setting',
   },
@@ -73,19 +70,6 @@ const routes: White.RouteConfig[] = [
   {
     path: '/',
     component: Home,
-  },
-  {
-    path: '/other',
-    component: Other,
-  },
-  {
-    path: '/other1',
-    sceneMode: 'bottom',
-    component: Other1,
-  },
-  {
-    path: '/dcotorDetail',
-    component: Detail,
   },
   {
     path: '/login',

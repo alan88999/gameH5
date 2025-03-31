@@ -35,7 +35,7 @@ const Login: FC = () => {
   return (
     <div className={styles.container}>
       <img className={styles.logo} src={require('./img/logo.png')} />
-      <div className={styles.title}>Login to 11win</div>
+      <div className={styles.title}>Login to Boss786</div>
       <div className={styles.inputContainer}>
         <CustomInput
           value={username}

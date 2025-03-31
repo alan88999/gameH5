@@ -13,9 +13,11 @@
     <link rel="icon" type="image/svg+xml" href="favicon.ico" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover, user-scalable=no, orientation=portrait"
     />
+
     <meta name="description" content="react ts template" />
+
     <title>react ts template</title>
     <!-- 字体库 -->
     <link
@@ -46,5 +48,13 @@
         targetElement.focus();
       }
     };
+  </script>
+  <script>
+    // 监听方向变化
+    window.addEventListener('orientationchange', function (e) {
+      if (window.orientation === 90 || window.orientation === -90) {
+        e.preventDefault();
+      }
+    });
   </script>
 </html>

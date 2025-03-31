@@ -6,7 +6,7 @@
     max-height: calc(100% - 68px);
     overflow-y: auto;
     .infoContainer {
-      width: 400px;
+      width: 100%;
       height: 212px;
       padding: 0 18px;
       border-radius: 16px;
@@ -20,7 +20,7 @@
           margin-top: 25px;
           margin-right: 5px;
         }
-        .info { 
+        .info {
           display: flex;
           flex-direction: column;
           padding-top: 15px;
@@ -128,7 +128,7 @@
       flex-wrap: wrap;
       .operateItem {
         margin-top: 12px;
-        width: 194px;
+        width: calc(50% - 7px);
         height: 86px;
         display: flex;
         flex-direction: column;
@@ -154,7 +154,7 @@
     .logConatiner {
       .logItem {
         margin-top: 12px;
-        width: 400px;
+        width: 100%;
         height: 65px;
         padding: 0 15px 0 25px;
         border-radius: 10px;
@@ -181,7 +181,6 @@
             font-weight: 400;
           }
         }
-      
       }
     }
   }

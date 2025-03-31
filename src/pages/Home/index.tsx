@@ -144,7 +144,7 @@ const Home = () => {
       <div className={styles.header}>
         <div className={styles.left}>
           <img className={styles.menu} src={require('./img/btn_menu.png')} />
-          <img className={styles.logo} src={require('./img/logo.png')} />
+          <img className={styles.logo} src={require('../Login/img/logo.png')} />
         </div>
         <Balance />
       </div>
