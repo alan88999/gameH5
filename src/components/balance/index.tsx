@@ -1,20 +1,21 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
-import { useTranslation } from 'react-i18next';
 import globalStore from '@/store/global.store';
 import styles from './index.module.less';
-import { formatBalance, getToken } from '@/utils';
+import { formatBalance, getToken, reactClassNameJoin } from '@/utils';
 import Avatar from '../Avatar';
 import { getCurrentUserInfo } from '@/services/api';
 
 interface Props {
   isAgent?: boolean;
+  showTwo?: boolean;
 }
 
 const Balance = (props: Props) => {
-  const { isAgent } = props;
-  const { t } = useTranslation('');
-  const { userInfo, setUserInfo } = globalStore;
+  const { isAgent, showTwo } = props;
+  const [currency, setCurrency] = useState<any>({});
+  const { userInfo, setUserInfo, currencyList, refreshgCurrencyList } =
+    globalStore;
   const token = getToken();
   const getUserInfo = async () => {
     const res = await getCurrentUserInfo();
@@ -27,15 +28,41 @@ const Balance = (props: Props) => {
       getUserInfo();
     }
   }, [token]);
+  useEffect(() => {
+    if (!currencyList.length) {
+      refreshgCurrencyList();
+    } else {
+      if (userInfo.id) {
+        const currentCurrency = currencyList.find(
+          (i: any) => i.id === userInfo.currency_id,
+        );
+        setCurrency(currentCurrency || { currency_code: 'THB:' });
+      }
+    }
+  }, [currencyList, userInfo]);
   return (
     <div className={styles.container}>
       <div className={styles.left}>
-        <div className={styles.text}>
-          {isAgent ? 'Agent' : 'Games'} Credit (BDT)
-        </div>
-        <div className={styles.balance}>
-          {formatBalance(userInfo[isAgent ? 'agent_balance' : 'game_balance'])}
-        </div>
+        {isAgent || showTwo ? (
+          <div className={reactClassNameJoin(styles.balanceItem, styles.balanceItemAgent)}>
+            <div className={styles.text}>Agent Credit (BDT)</div>
+            <div className={styles.balance}>
+              {formatBalance(userInfo.agent_balance)}
+            </div>
+          </div>
+        ) : (
+          ''
+        )}
+        {!isAgent ? (
+          <div className={styles.balanceItem}>
+            <div className={styles.text}>Games Credit (BDT)</div>
+            <div className={styles.balance}>
+              {formatBalance(userInfo.game_balance)}
+            </div>
+          </div>
+        ) : (
+          ''
+        )}
       </div>
       <div className={styles.right}>
         <Avatar userinfo={userInfo} className={styles.avatar} />

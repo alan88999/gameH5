@@ -1,20 +1,37 @@
-import { getCurrentUserInfo } from '@/services/api';
+import { getCurrentUserInfo, getCurrencyList } from '@/services/api';
 import { makeAutoObservable, runInAction } from 'mobx';
 
 const globalStore = makeAutoObservable({
+  currencyList: [],
+  setCurrencyList: (val: any) => {
+    runInAction(() => {
+      globalStore.currencyList = val;
+    });
+  },
+  refreshgCurrencyList: async () => {
+    runInAction(() => {
+      globalStore.refreshing = true;
+    });
+    const res = await getCurrencyList();
+    runInAction(() => {
+      if (res.data.code === 200) {
+        globalStore.setCurrencyList(res.data.data || []);
+      }
+    });
+  },
   userInfo: {
-    id:0,
+    id: 0,
     status: 1,
     currency_id: 0,
-    nickname:'nickname',
-    username:'username',
+    nickname: 'nickname',
+    username: 'username',
     game_balance: 0,
     agent_balance: 0,
     master_count: 0,
     wechat: '',
-    whats_app:'',
+    whats_app: '',
     prefix: '',
-  } ,
+  },
   refreshing: false,
   setUserInfo: (val: any) => {
     runInAction(() => {
@@ -29,13 +46,12 @@ const globalStore = makeAutoObservable({
     runInAction(() => {
       // 默认最少请求0.5秒，为了显示loading动画
       setTimeout(() => {
-        globalStore.refreshing = false;  
+        globalStore.refreshing = false;
         if (res.data.code === 200) {
           globalStore.setUserInfo(res.data.data);
-        }  
+        }
       }, 500);
     });
-   
   },
 });
 

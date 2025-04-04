@@ -194,12 +194,12 @@ const DownlineDetail = () => {
 
   return (
     <div className={styles.container}>
-      <Header title={''} right={<Balance />} />
+      <Header title={''} right={<Balance isAgent />} />
       <div className={styles.content}>
         <div className={styles.infoContainer}>
           <div className={styles.userinfo}>
             <div className={styles.avatar}>
-              <Avatar userinfo={userinfo?.user_info}/>
+              <Avatar userinfo={userinfo?.user_info} />
             </div>
             <div className={styles.info}>
               <span className={styles.text}>Player ID</span>
@@ -213,23 +213,28 @@ const DownlineDetail = () => {
               </span>
             </div>
           </div>
+
+          <img
+            onClick={queryUserinfoReq}
+            src={require('../Setting/img/icon-refresh.png')}
+            className={reactClassNameJoin(
+              styles.loadingIcon,
+              loading ? styles.loading : '',
+            )}
+          />
           <div className={styles.balanceContainer}>
-            <img
-              onClick={queryUserinfoReq}
-              src={require('../Setting/img/icon-refresh.png')}
-              className={reactClassNameJoin(
-                styles.loadingIcon,
-                loading ? styles.loading : '',
-              )}
-            />
-            <span className={styles.text}>(BDT)</span>
-            <span className={styles.balance}>
-              {formatBalance(
-                userinfo?.user_info?.[
-                  isPlayer ? 'game_balance' : 'agent_balance'
-                ] || 0,
-              )}
-            </span>
+          <div className={styles.balanceItem}>
+              <span className={styles.text}>Agent Credit (BDT)</span>
+              <span className={styles.balance}>
+                {formatBalance(userinfo?.user_info?.agent_balance || 0)}
+              </span>
+            </div>
+            <div className={styles.balanceItem}>
+              <span className={styles.text}>Game Credit (BDT)</span>
+              <span className={styles.balance}>
+                {formatBalance(userinfo?.user_info?.game_balance || 0)}
+              </span>
+            </div>
           </div>
           <div className={styles.operate}>
             <div
