@@ -9,6 +9,7 @@ import CustoModal from '@/components/CustomModal';
 import history from '@/utils/history';
 import globalStore from '@/store/global.store';
 import { Toast } from 'antd-mobile';
+import CopyToClipboard from 'react-copy-to-clipboard';
 import { reactClassNameJoin } from '@/utils';
 
 const AddUser = () => {
@@ -28,8 +29,8 @@ const AddUser = () => {
   const { userInfo, refreshUserInfo } = globalStore;
 
   const btnActive = useMemo(() => {
-    return nickname && phone && balance && newPassword && confirmPassword;
-  }, [nickname, phone, balance, newPassword, confirmPassword]);
+    return nickname && newPassword && confirmPassword;
+  }, [nickname, newPassword, confirmPassword]);
 
   useEffect(() => {
     if (!userInfo?.id) {
@@ -128,6 +129,7 @@ const AddUser = () => {
           <div className={styles.inputContainer}>
             <CustomInput
               value={newPassword}
+              autoComplete="new-password"
               type="password"
               icon={require('../Login/img/icon-password.png')}
               placeholder="New Password"
@@ -139,6 +141,7 @@ const AddUser = () => {
           <div className={styles.inputContainer}>
             <CustomInput
               value={confirmPassword}
+              autoComplete="new-password"
               type="password"
               icon={require('../Login/img/icon-password.png')}
               placeholder="Confirm Password"
@@ -191,11 +194,33 @@ const AddUser = () => {
             history.go(-1);
           }}
           content={'You’ve got it!'}
+          contentDescClassName={styles.successModalDesc}
           contentDesc={
-            <div>
+            <div className={styles.successModal}>
               New downline{' '}
               <span className={styles.newUser}>{newUserinfo?.username}</span>
               has been created successfully.
+              <div className={styles.newInfo}>
+                <div className={styles.newInfoItem}>
+                  <img src={require('../Login/img/icon-username.png')} />
+                  <span>{newUserinfo?.username}</span>
+                </div>
+                <div className={styles.newInfoItem}>
+                  <img src={require('../Login/img/icon-password.png')} />
+                  <span>{newUserinfo?.password}</span>
+                </div>
+                <CopyToClipboard
+                  text={`${newUserinfo?.username}${`\n`}${
+                    newUserinfo?.password
+                  }`}
+                  onCopy={() => {
+                    Toast.show({
+                      content: 'Copy Successfully',
+                    });
+                  }}>
+                  <Button className={styles.copyBtn}>Copy</Button>
+                </CopyToClipboard>
+              </div>
             </div>
           }
         />

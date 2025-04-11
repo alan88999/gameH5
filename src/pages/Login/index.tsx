@@ -12,20 +12,24 @@ const Login: FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const getUserInfo = async () => {
+  const getUserInfo = async (is_first: boolean) => {
     const res = await getCurrentUserInfo();
     if (res.data.code === 200) {
       globalStore.setUserInfo(res.data.data);
-      history.push('/');
+      if (is_first) {
+        history.push('/password');
+      } else {
+        history.push('/');
+      }
     }
   };
   const handleLogin = async () => {
     setLoading(true);
-    const res = await login({ username, password, source: 2 });
+    const res = await login({ username, password, source: 1 });
     setLoading(false);
     if (res.data.code === 200) {
-      localStorage.setItem('token', `Bearer ${res.data.data}`);
-      getUserInfo();
+      localStorage.setItem('token', `Bearer ${res.data.data.token}`);
+      getUserInfo(res.data.data.is_first);
     } else {
       Toast.show({
         content: res?.data?.msg,
@@ -35,12 +39,12 @@ const Login: FC = () => {
   return (
     <div className={styles.container}>
       <img className={styles.logo} src={require('./img/logo.png')} />
-      <div className={styles.title}>Login to Boss786</div>
+      {/* <div className={styles.title}>Login to Boss786</div> */}
       <div className={styles.inputContainer}>
         <CustomInput
           value={username}
           icon={require('./img/icon-username.png')}
-          placeholder=""
+          placeholder="Username"
           onChange={(val) => {
             setUsername(val);
           }}
@@ -49,7 +53,8 @@ const Login: FC = () => {
       <div className={styles.inputContainer}>
         <CustomInput
           icon={require('./img/icon-password.png')}
-          type="password"
+          placeholder="password"
+          type="Password"
           value={password}
           onChange={(val) => {
             setPassword(val);
@@ -62,7 +67,7 @@ const Login: FC = () => {
         icon={require('./img/icon-login.png')}
         className={styles.loginButton}
         onClick={handleLogin}>
-        登录
+        Login
       </Button>
     </div>
   );

@@ -9,6 +9,7 @@ interface Props extends ModalProps {
   contentDesc?: any;
   icon?: string;
   contentInnerClassName?: string;
+  contentDescClassName?: string;
   footer?: {
     okText?: string;
     onOk?: () => void;
@@ -17,8 +18,15 @@ interface Props extends ModalProps {
   };
 }
 const CustoModal = (props: Props) => {
-  const { footer, icon, content, contentInnerClassName, contentDesc, ...rest } =
-    props;
+  const {
+    footer,
+    icon,
+    content,
+    contentInnerClassName,
+    contentDescClassName,
+    contentDesc,
+    ...rest
+  } = props;
   const {
     okText = 'Confirm',
     onOk,
@@ -46,7 +54,13 @@ const CustoModal = (props: Props) => {
               {content}
             </div>
             {contentDesc ? (
-              <div className={styles.contentDesc}>{contentDesc}</div>
+              <div
+                className={reactClassNameJoin(
+                  styles.contentDesc,
+                  contentDescClassName,
+                )}>
+                {contentDesc}
+              </div>
             ) : (
               ''
             )}

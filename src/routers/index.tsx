@@ -37,18 +37,18 @@ const NoFound = lazy(
 );
 export const TabBarList: White.RouteTabBar[] = [
   {
+    path: '/',
+    component: Home,
+    icon: require('../components/Footer/img/btn-support.png'),
+    sceneMode: 'scroll',
+    title: 'Home',
+  },
+  {
     path: '/gameLog',
     component: GameLog,
     icon: require('../components/Footer/img/btn-gamelog.png'),
     sceneMode: 'scroll',
     title: 'GameLog',
-  },
-  {
-    path: '/support',
-    component: GameLog,
-    icon: require('../components/Footer/img/btn-support.png'),
-    sceneMode: 'scroll',
-    title: 'Support',
   },
   {
     path: '/downlineManagement',

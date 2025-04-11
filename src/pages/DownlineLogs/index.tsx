@@ -121,7 +121,7 @@ const DownlineLogs = () => {
                   item.amount || 0,
                 )}`
               : type === 2
-              ? item.payoff_amount
+              ? formatBalance(item.payoff_amount)
               : item.ip;
           return (
             <div className={styles.listItem} key={index}>
