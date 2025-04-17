@@ -11,8 +11,10 @@ import { getGameLogs } from '@/services/api';
 import globalStore from '@/store/global.store';
 import styles from './index.module.less';
 import dayjs from 'dayjs';
+import { useTranslation } from 'react-i18next';
 
 const GameLog = () => {
+  const { t } = useTranslation();
   const { userInfo } = globalStore;
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState({
@@ -60,14 +62,14 @@ const GameLog = () => {
               <div className={styles.name}>{item.name}</div>
               <div className={styles.amount}>
                 <div className={styles.betAmount}>
-                  Bet Amount: {formatBalance(-item.bet_amount)}
+                {`${t('betAmount')}: `}{formatBalance(-item.bet_amount)}
                 </div>
                 <div
                   className={reactClassNameJoin(
                     styles.settelAmount,
                     item.payoff_amount > 0 ? styles.settelAmountWin : '',
                   )}>
-                  {item.payoff_amount > 0 ? 'Win Amt: ' : 'Win Amt: '}
+                  {`${t('winAmount')}: `}
                   {formatBalance(item.payoff_amount)}
                 </div>
               </div>
@@ -96,7 +98,7 @@ const GameLog = () => {
   return (
     <div className={styles.container}>
       <Header
-        title="Game Logs"
+        title={t('gameLog')}
         right={<Balance />}
         onBack={() => {
           history.replace('/');

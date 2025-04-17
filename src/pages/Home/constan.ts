@@ -1,11 +1,11 @@
 export const CategoriesMap: any = {
-  hot: 'Hot & New',
-  fish: 'Fishing',
-  slot: 'Slot',
-  arcade: 'Crash',
-  card: 'Dice',
-  'slot/arcade': 'Slot Arcade',
-  casino: 'Poker',
+  hot: 'hot',
+  fish: 'fishing',
+  slot: 'slot',
+  arcade: 'crash',
+  card: 'dice',
+  'slot/arcade': 'slotArcade',
+  casino: 'poker',
 };
 
 export const Hot = {

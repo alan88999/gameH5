@@ -5,6 +5,7 @@ import styles from './index.module.less';
 import { formatBalance, getToken, reactClassNameJoin } from '@/utils';
 import Avatar from '../Avatar';
 import { getCurrentUserInfo } from '@/services/api';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   isAgent?: boolean;
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const Balance = (props: Props) => {
+  const {t} = useTranslation();
   const { isAgent, showTwo } = props;
   const [currency, setCurrency] = useState<any>({});
   const { userInfo, setUserInfo, currencyList, refreshgCurrencyList } =
@@ -45,7 +47,7 @@ const Balance = (props: Props) => {
       <div className={styles.left}>
         {isAgent || showTwo ? (
           <div className={reactClassNameJoin(styles.balanceItem, styles.balanceItemAgent)}>
-            <div className={styles.text}>Agent Credit (BDT)</div>
+            <div className={styles.text}>{t('agentCredit')}</div>
             <div className={styles.balance}>
               {formatBalance(userInfo.agent_balance)}
             </div>
@@ -55,7 +57,7 @@ const Balance = (props: Props) => {
         )}
         {!isAgent ? (
           <div className={styles.balanceItem}>
-            <div className={styles.text}>Games Credit (BDT)</div>
+            <div className={styles.text}>{t('gameCredit')}</div>
             <div className={styles.balance}>
               {formatBalance(userInfo.game_balance)}
             </div>

@@ -4,6 +4,7 @@ import CustomInput from '@/components/input';
 import CustoModal from '@/components/CustomModal';
 import styles from './index.module.less';
 import { Toast } from 'antd-mobile';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   item: any;
@@ -17,6 +18,7 @@ const TranferModal = (props: Props) => {
   const { isTopUp, visible, item, type, onClose, onSuccess } = props;
   const [money, setMoney] = useState('');
   const [insufficientVisible, setInsufficientVisible] = useState(false);
+  const {t}  =useTranslation();
   useEffect(()=>{
     if(!visible) {
         setMoney('')
@@ -59,20 +61,20 @@ const TranferModal = (props: Props) => {
   const renderContent = (item: any) => {
     return (
       <div className={styles.modalContent}>
-        <div className={styles.title}>{isTopUp ? 'Top Up' : 'Withdraw'}</div>
+        <div className={styles.title}>{isTopUp ? t('topUp') : t('withdraw')}</div>
         <div className={styles.desc}>
           Please enter the amount that you wish to {isTopUp?'top up':'withdraw'} for downline below:
         </div>
         <div className={styles.idText}>ID: {item.id}</div>
         <div className={styles.inputContainer}>
-          <div className={styles.text}>(BDT)</div>
+          <div className={styles.text}>{t('BDT')}</div>
           <CustomInput
             clsasName={styles.input}
             value={money}
             onChange={(val) => setMoney(val)}
             type="number"
             icon={require('../../img/icon-money-input.png')}
-            placeholder="Enter Amount(BDT)"
+            placeholder={t('amountDesc')}
           />
         </div>
       </div>

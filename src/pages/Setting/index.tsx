@@ -9,8 +9,10 @@ import CustoModal from '@/components/CustomModal';
 import history from '@/utils/history';
 import { logout } from '@/services/api';
 import { Toast } from 'antd-mobile';
+import { useTranslation } from 'react-i18next';
 
 const Setting = () => {
+  const { t } = useTranslation();
   const { refreshUserInfo, userInfo, refreshing } = globalStore;
   const [modalProps, setModalProps] = useState<any>({
     visible: false,
@@ -57,7 +59,7 @@ const Setting = () => {
   return (
     <div className={styles.container}>
       <Header
-        title="Setting"
+        title={t('setting')}
         onBack={() => {
           history.replace('/');
         }}
@@ -68,7 +70,7 @@ const Setting = () => {
             <Avatar userinfo={userInfo} />
           </div>
           <div className={styles.idInfo}>
-            <div className={styles.text}>Player ID</div>
+            <div className={styles.text}>{t('playerID')}</div>
             <div
               className={
                 styles.idText
@@ -78,7 +80,7 @@ const Setting = () => {
                 styles.active,
                 userInfo?.status === 2 ? styles.inactive : '',
               )}>
-              {userInfo.status === 1 ? 'Active' : 'Inactive'}
+              {userInfo.status === 1 ? t('active') : 'Inactive'}
             </div>
           </div>
         </div>
@@ -93,7 +95,7 @@ const Setting = () => {
               refreshUserInfo();
             }}
           />
-          <div className={styles.text}>Agent Credit (BDT)</div>
+          <div className={styles.text}>{t('agentCreditBalance')}</div>
           <div className={styles.balance}>
             {formatBalance(userInfo.agent_balance)}
           </div>
@@ -110,7 +112,7 @@ const Setting = () => {
               src={require('./img/icon-changePassword.png')}
               className={styles.icon}
             />
-            <div className={styles.listText}>Change Password</div>
+            <div className={styles.listText}>{t('changePassword')}</div>
           </div>
           <div className={styles.arrow}>
             <img
@@ -126,7 +128,7 @@ const Setting = () => {
               ...modalProps,
               icon: require('../DownlineDetail/img/modal-logout.png'),
               visible: true,
-              content: 'Are you sure to force-logout this account?',
+              content: t('forceLogoutDesc'),
               footer: {
                 onOk: logoutReq,
                 onCancel: () => {
@@ -143,7 +145,7 @@ const Setting = () => {
               src={require('./img/icon-logout.png')}
               className={styles.icon}
             />
-            <div className={styles.listText}>Logout</div>
+            <div className={styles.listText}>{t('logout')}</div>
           </div>
           <div className={styles.arrow}>
             <img

@@ -11,8 +11,10 @@ import globalStore from '@/store/global.store';
 import { Toast } from 'antd-mobile';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import { reactClassNameJoin } from '@/utils';
+import { useTranslation } from 'react-i18next';
 
 const AddUser = () => {
+  const { t } = useTranslation();
   const [newUserinfo, setNewUseinfo] = useState({
     currency_id: 0,
     password: '',
@@ -44,7 +46,7 @@ const AddUser = () => {
     }
     if (newPassword !== confirmPassword) {
       Toast.show({
-        content: 'New Password and Confirm Password must be the same',
+        content: t('sameDesc'),
       });
       return;
     }
@@ -88,17 +90,15 @@ const AddUser = () => {
     <div className={styles.container}>
       <Header title="Add Downline" />
       <div className={styles.content}>
-        <div className={styles.desc}>
-          Please insert the following details to add a new downline.
-        </div>
+        <div className={styles.desc}>{t('addDownlineDesc')}</div>
         <div className={styles.form}>
-          <div className={styles.formLabel}>Details</div>
+          <div className={styles.formLabel}>{t('details')}</div>
           <div className={styles.inputContainer}>
             <CustomInput
               value={nickname}
               type="text"
               icon={require('../Login/img/icon-username.png')}
-              placeholder="Usename"
+              placeholder={t('username')}
               onChange={(val) => {
                 setNickname(val);
               }}
@@ -109,7 +109,7 @@ const AddUser = () => {
               value={phone}
               type="phone"
               icon={require('./img/icon-phone.png')}
-              placeholder="Phone No."
+              placeholder={t('phone')}
               onChange={(val) => {
                 setPhone(val);
               }}
@@ -120,7 +120,7 @@ const AddUser = () => {
               value={email}
               type="text"
               icon={require('./img/icon-phone.png')}
-              placeholder="Email"
+              placeholder={t('email')}
               onChange={(val) => {
                 seEmail(val);
               }}
@@ -132,7 +132,7 @@ const AddUser = () => {
               autoComplete="new-password"
               type="password"
               icon={require('../Login/img/icon-password.png')}
-              placeholder="New Password"
+              placeholder={t('newPassword')}
               onChange={(val) => {
                 setNewPassword(val);
               }}
@@ -144,7 +144,7 @@ const AddUser = () => {
               autoComplete="new-password"
               type="password"
               icon={require('../Login/img/icon-password.png')}
-              placeholder="Confirm Password"
+              placeholder={t('confirmPassword')}
               onChange={(val) => {
                 setConfirmPassword(val);
               }}
@@ -155,14 +155,14 @@ const AddUser = () => {
           className={reactClassNameJoin(styles.formLabel, styles.formLabel2)}>
           Add Credit For New Downline
         </div>
-        <div className={styles.balanceText}>(BDT)</div>
+        <div className={styles.balanceText}>{t('BDT')}</div>
         <div className={styles.form}>
           <div className={styles.inputContainer}>
             <CustomInput
               value={balance}
               type="number"
               icon={require('../DownlineManagement/img/icon-money-input.png')}
-              placeholder="Enter Amount (BDT)"
+              placeholder={t('amountDesc')}
               onChange={(val) => {
                 setMoney(val);
               }}
@@ -175,14 +175,14 @@ const AddUser = () => {
             disabled={!btnActive}
             className={styles.confirmBtn}
             onClick={addNewUserReq}>
-            Confirm
+            {t('confirm')}
           </Button>
           <Button
             className={styles.cancelBtn}
             onClick={() => {
               history.go(-1);
             }}>
-            Cancel
+            {t('cancel')}
           </Button>
         </div>
         <CustoModal
@@ -193,13 +193,13 @@ const AddUser = () => {
             setVisible(false);
             history.go(-1);
           }}
-          content={'You’ve got it!'}
+          content={t('downlineTitle')}
           contentDescClassName={styles.successModalDesc}
           contentDesc={
             <div className={styles.successModal}>
-              New downline{' '}
+              {t('downlineSuccess')}
               <span className={styles.newUser}>{newUserinfo?.username}</span>
-              has been created successfully.
+              {t('downlineSuccess2')}
               <div className={styles.newInfo}>
                 <div className={styles.newInfoItem}>
                   <img src={require('../Login/img/icon-username.png')} />
@@ -215,10 +215,10 @@ const AddUser = () => {
                   }`}
                   onCopy={() => {
                     Toast.show({
-                      content: 'Copy Successfully',
+                      content: t('copySuccess'),
                     });
                   }}>
-                  <Button className={styles.copyBtn}>Copy</Button>
+                  <Button className={styles.copyBtn}>{t('copy')}</Button>
                 </CopyToClipboard>
               </div>
             </div>

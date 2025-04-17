@@ -13,8 +13,10 @@ import { Toast } from 'antd-mobile';
 import dayjs from 'dayjs';
 import Pagination from '@/components/Pagination';
 import Avatar from '@/components/Avatar';
+import { useTranslation } from 'react-i18next';
 
 const DownlineLogs = () => {
+  const { t} = useTranslation()
   const id = Number(getUrlParams('id'));
   const typeUrl = getUrlParams('type');
 
@@ -110,11 +112,11 @@ const DownlineLogs = () => {
           const text1 =
             type === 1
               ? item.transfer_type === 1
-                ? 'Top Up'
-                : 'Withdraw'
+                ? t('topUp')
+                : t('withdraw')
               : type === 2
               ? item.name
-              : 'IP';
+              : t('IP');
           const text3 =
             type === 1
               ? `${item.transfer_type === 1 ? '+' : ''}${formatBalance(
@@ -128,7 +130,7 @@ const DownlineLogs = () => {
               <div className={styles.left}>
                 <div className={styles.title}>{text1}</div>
                 <div className={styles.time}>
-                  Date: {dayjs(item.created_at).format('HH:mm:ss MM/DD/YYYY')}
+                  {t('date')}: {dayjs(item.created_at).format('HH:mm:ss MM/DD/YYYY')}
                 </div>
               </div>
               <div
@@ -150,7 +152,7 @@ const DownlineLogs = () => {
   };
   return (
     <div className={styles.container}>
-      <Header title="Downline Logs" />
+      <Header title={t('downlineLog')}/>
       <div className={styles.content}>
         <div className={styles.infoContainer}>
           <div className={styles.userinfo}>
@@ -158,14 +160,14 @@ const DownlineLogs = () => {
               <Avatar userinfo={userinfo} />
             </div>
             <div className={styles.info}>
-              <span className={styles.text}>Player ID</span>
+              <span className={styles.text}>{t('playerID')}</span>
               <span className={styles.id}>{id}</span>
               <span
                 className={reactClassNameJoin(
                   styles.active,
                   userinfo?.user_info?.status === 2 ? styles.inactive : '',
                 )}>
-                {userinfo?.user_info?.status === 2 ? 'Inactive' : 'Active'}
+                {userinfo?.user_info?.status === 2 ? 'Inactive' : t('active')}
               </span>
             </div>
           </div>
@@ -179,7 +181,7 @@ const DownlineLogs = () => {
             onClick={() => {
               setType(1);
             }}>
-            Transactions
+            {t('transactions')}
           </div>
           <div
             className={reactClassNameJoin(
@@ -189,7 +191,7 @@ const DownlineLogs = () => {
             onClick={() => {
               setType(2);
             }}>
-            Game Log
+            {t('gameLog')}
           </div>
           <div
             className={reactClassNameJoin(
@@ -199,7 +201,7 @@ const DownlineLogs = () => {
             onClick={() => {
               setType(3);
             }}>
-            IP Log
+            {t('IPLog')}
           </div>
         </div>
         <div className={styles.listContainer}>

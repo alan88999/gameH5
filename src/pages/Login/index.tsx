@@ -1,17 +1,23 @@
-import { FC, memo, useEffect, useState } from 'react';
+import { FC, memo, useState } from 'react';
 import { login, getCurrentUserInfo } from '@/services/api';
 import history from '@/utils/history';
 import Button from '@/components/button';
 import CustomInput from '@/components/input';
 import globalStore from '@/store/global.store';
+import { useTranslation } from 'react-i18next';
+import LanguagePicker, { LanguageMap } from '@/components/LanguagePicker';
+import i18n from '@/i18n';
 
 import styles from './index.module.less';
 import { Toast } from 'antd-mobile';
 
 const Login: FC = () => {
+  const { t } = useTranslation();
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
+
   const getUserInfo = async (is_first: boolean) => {
     const res = await getCurrentUserInfo();
     if (res.data.code === 200) {
@@ -38,13 +44,30 @@ const Login: FC = () => {
   };
   return (
     <div className={styles.container}>
-      <img className={styles.logo} src={require('./img/logo.png')} />
-      {/* <div className={styles.title}>Login to Boss786</div> */}
+      <div
+        className={styles.languageContainer}
+        onClick={() => {
+          setVisible(true);
+        }}>
+        <img
+          src={
+            i18n.language === 'en'
+              ? require('./img/en.png')
+              : require('./img/bd.png')
+          }
+        />
+        {LanguageMap[i18n.language]}
+      </div>
+      <img className={styles.logoTop} src={require('./img/logo-top.png')} />
+      <img
+        className={styles.logoBottom}
+        src={require('./img/logo-bottom.png')}
+      />
       <div className={styles.inputContainer}>
         <CustomInput
           value={username}
           icon={require('./img/icon-username.png')}
-          placeholder="Username"
+          placeholder={t('username')}
           onChange={(val) => {
             setUsername(val);
           }}
@@ -53,7 +76,7 @@ const Login: FC = () => {
       <div className={styles.inputContainer}>
         <CustomInput
           icon={require('./img/icon-password.png')}
-          placeholder="password"
+          placeholder={t('password')}
           type="Password"
           value={password}
           onChange={(val) => {
@@ -67,8 +90,9 @@ const Login: FC = () => {
         icon={require('./img/icon-login.png')}
         className={styles.loginButton}
         onClick={handleLogin}>
-        Login
+        {t('login')}
       </Button>
+      <LanguagePicker visible={visible} onCancel={() => setVisible(false)} />
     </div>
   );
 };

@@ -10,11 +10,12 @@ import CustoModal from '@/components/CustomModal';
 import history from '@/utils/history';
 import styles from './index.module.less';
 import Avatar from '@/components/Avatar';
+import { useTranslation } from 'react-i18next';
 
 const DownlineDetail = () => {
+  const { t } = useTranslation();
   const id = Number(getUrlParams('id'));
   const type = getUrlParams('type');
-  const isPlayer = type === 'player';
   const [modalProps, setModalProps] = useState({
     visible: false,
     content: '',
@@ -32,6 +33,7 @@ const DownlineDetail = () => {
       game_balance: 0,
       agent_balance: 0,
       updated_at: 0,
+      prefix: '',
     },
     log: {
       ip: '',
@@ -87,10 +89,7 @@ const DownlineDetail = () => {
                 : require('./img/modal-freeze-done.png'),
             visible: true,
             content: status === 1 ? '' : '',
-            contentDesc:
-              status === 1
-                ? 'This account has been successfully reset.'
-                : 'This account has been successfully frozen.',
+            contentDesc: status === 1 ? t('resetSuccess') : t('freezeSuccess'),
             footer: undefined as any,
           });
           // 两秒后自动关闭
@@ -121,9 +120,7 @@ const DownlineDetail = () => {
           : require('./img/modal-freeze.png'),
       visible: true,
       contentDesc:
-        status === 1
-          ? 'Are you sure to reset this account?'
-          : 'Are you sure to freeze this account?',
+        status === 1 ? t('resetAccountDesc') : t('freezeAccountDesc'),
       footer: {
         onOk: () => {
           modifyStatusReq(status);
@@ -149,8 +146,8 @@ const DownlineDetail = () => {
 
             icon: require('./img/modal-logout-done.png'),
             visible: true,
-            content: 'Account Logged Out!',
-            contentDesc: 'This account has been successfully force logged out.',
+            content: t('accountloggedOut'),
+            contentDesc: t('logoutSuccess'),
             footer: undefined as any,
           });
           // 两秒后自动关闭
@@ -179,7 +176,7 @@ const DownlineDetail = () => {
       ...modalProps,
       icon: require('./img/modal-logout.png'),
       visible: true,
-      contentDesc: 'Are you sure to force-logout this account?',
+      contentDesc: t('forceLogoutDesc'),
       footer: {
         onOk: logoutReq,
         onCancel: () => {
@@ -202,14 +199,18 @@ const DownlineDetail = () => {
               <Avatar userinfo={userinfo?.user_info} />
             </div>
             <div className={styles.info}>
-              <span className={styles.text}>Player ID</span>
-              <span className={styles.id}>{id}</span>
+              <span className={styles.text}>{t('playerID')}</span>
+              <span className={styles.id}>{`${
+                userinfo?.user_info?.prefix || ''
+              }${userinfo?.user_info?.id.toString().slice(0, 8)}/${
+                userinfo?.user_info?.username
+              }`}</span>
               <span
                 className={reactClassNameJoin(
                   styles.active,
                   userinfo?.user_info?.status === 2 ? styles.inactive : '',
                 )}>
-                {userinfo?.user_info?.status === 2 ? 'Inactive' : 'Active'}
+                {userinfo?.user_info?.status === 2 ? 'Inactive' : t('active')}
               </span>
             </div>
           </div>
@@ -223,14 +224,14 @@ const DownlineDetail = () => {
             )}
           />
           <div className={styles.balanceContainer}>
-          <div className={styles.balanceItem}>
-              <span className={styles.text}>Agent Credit (BDT)</span>
+            <div className={styles.balanceItem}>
+              <span className={styles.text}>{t('agentCreditBalance')}</span>
               <span className={styles.balance}>
                 {formatBalance(userinfo?.user_info?.agent_balance || 0)}
               </span>
             </div>
             <div className={styles.balanceItem}>
-              <span className={styles.text}>Game Credit (BDT)</span>
+              <span className={styles.text}>{t('gameCreditBalance')}</span>
               <span className={styles.balance}>
                 {formatBalance(userinfo?.user_info?.game_balance || 0)}
               </span>
@@ -244,7 +245,7 @@ const DownlineDetail = () => {
                 setVisible(true);
               }}>
               <img src={require('./img/icon-topup.png')} />
-              Top Up
+              {t('topUp')}
             </div>
             <div
               className={styles.withdraw}
@@ -252,7 +253,7 @@ const DownlineDetail = () => {
                 setIsTopUp(false);
                 setVisible(true);
               }}>
-              Withdraw
+              {t('withdraw')}
             </div>
           </div>
         </div>
@@ -261,17 +262,17 @@ const DownlineDetail = () => {
             className={styles.operateItem}
             onClick={() => handleModifyStatus(1)}>
             <img src={require('./img/icon-reset.png')} />
-            <span>Reset Account</span>
+            <span>{t('resetAccount')}</span>
           </div>
           <div
             className={styles.operateItem}
             onClick={() => handleModifyStatus(2)}>
             <img src={require('./img/icon-freeze.png')} />
-            <span>Freeze Account</span>
+            <span>{t('freezeAccount')}</span>
           </div>
           <div className={styles.operateItem} onClick={handleLogout}>
             <img src={require('../Setting/img/icon-logout.png')} />
-            <span>Force Logout</span>
+            <span>{t('forceLogout')}</span>
           </div>
           <div
             className={styles.operateItem}
@@ -279,7 +280,7 @@ const DownlineDetail = () => {
               history.push(`/password?id=${id}`);
             }}>
             <img src={require('../Setting/img/icon-changePassword.png')} />
-            <span>Change Password</span>
+            <span>{t('changePassword')}</span>
           </div>
         </div>
         <div className={styles.logConatiner}>
@@ -289,9 +290,9 @@ const DownlineDetail = () => {
               history.push(`/downlineLogs?id=${id}&type=1`);
             }}>
             <div className={styles.left}>
-              <span>Transaction Log</span>
+              <span>{t('transactionLog')}</span>
               <span>
-                Last Transaction:{' '}
+                {t('lastTransaction')}:{' '}
                 {formatBalance(userinfo?.transaction?.amount || 0)}
               </span>
             </div>
@@ -305,8 +306,10 @@ const DownlineDetail = () => {
               history.push(`/downlineLogs?id=${id}&type=2`);
             }}>
             <div className={styles.left}>
-              <span>Game Log</span>
-              <span>Last Played: {userinfo?.bet_start}</span>
+              <span>{t('gameLog')}</span>
+              <span>
+                {t('lastPlayed')}: {userinfo?.bet_start}
+              </span>
             </div>
             <div className={styles.arrow}>
               <img src={require('./img/btn-next.png')} />
@@ -318,8 +321,10 @@ const DownlineDetail = () => {
               history.push(`/downlineLogs?id=${id}&type=3`);
             }}>
             <div className={styles.left}>
-              <span>IP Log</span>
-              <span>Last IP: {userinfo?.log?.ip}</span>
+              <span>{t('IPLog')}</span>
+              <span>
+                {t('lastIP')}: {userinfo?.log?.ip}
+              </span>
             </div>
             <div className={styles.arrow}>
               <img src={require('./img/btn-next.png')} />

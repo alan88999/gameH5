@@ -7,8 +7,10 @@ import { formatBalance, reactClassNameJoin } from '@/utils';
 import { getDownUsers } from '@/services/api';
 import history from '@/utils/history';
 import TranferModal from './components/transferModal';
+import { useTranslation } from 'react-i18next';
 
 const DownlineManagement = () => {
+  const { t } = useTranslation();
   const [type, setType] = useState('player');
   const [isTopUp, setIsTopUp] = useState(true);
   const [visible, setVisible] = useState(false);
@@ -34,7 +36,9 @@ const DownlineManagement = () => {
           <div className={styles.info}>
             <div className={styles.infoText}>
               <img src={require('./img/icon-id.png')} />
-              {item.id}
+              {`${item.prefix || ''}${item.id.toString().slice(0, 8)}/${
+                item.username
+              }`}
             </div>
             <div className={styles.infoText}>
               <img src={require('./img/icon-money.png')} />
@@ -60,14 +64,20 @@ const DownlineManagement = () => {
                 setIsTopUp(false);
                 setVisible(true);
               }}>
-              <img className={styles.icon} src={require('./img/btn-minus.png')} />
+              <img
+                className={styles.icon}
+                src={require('./img/btn-minus.png')}
+              />
             </div>
             <div
               className={styles.btn}
               onClick={() => {
                 history.push(`/downlineDetail?id=${item.id}&type=${type}`);
               }}>
-              <img className={styles.icon} src={require('./img/btn-more.png')} />
+              <img
+                className={styles.icon}
+                src={require('./img/btn-more.png')}
+              />
             </div>
           </div>
         </div>
@@ -81,12 +91,12 @@ const DownlineManagement = () => {
         onBack={() => {
           history.replace('/');
         }}
-        right={<Balance isAgent/>}
+        right={<Balance isAgent />}
       />
       <div className={styles.content}>
         <div className={styles.filterContainer}>
           <div className={styles.title}>
-            <span>Downline Management</span>
+            <span>{t('downlineManagement')}</span>
             <div
               className={styles.addBtn}
               onClick={() => {
@@ -104,7 +114,7 @@ const DownlineManagement = () => {
               onClick={() => {
                 setType('player');
               }}>
-              Players
+              {t('players')}
             </div>
             <div
               className={reactClassNameJoin(
@@ -114,7 +124,7 @@ const DownlineManagement = () => {
               onClick={() => {
                 setType('agent');
               }}>
-              Agents
+              {t('agents')}
             </div>
           </div>
         </div>

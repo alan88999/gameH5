@@ -2,11 +2,12 @@ import AnimatedSwitch from '@/components/AnimatedSwitch';
 import LoadingView from '@/components/LoadingView';
 import useTitle from '@/hooks/useTitle';
 import { White } from '@/typings';
-import { treeToList } from '@/utils';
+import { treeToList, getUrlParams } from '@/utils';
 import { Suspense, useLayoutEffect, useMemo } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import routes from './index';
 import useSwitch from './useSwitch';
+import { useTranslation } from 'react-i18next';
 const generateRoute = ({
   routes,
   path,

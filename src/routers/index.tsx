@@ -41,28 +41,28 @@ export const TabBarList: White.RouteTabBar[] = [
     component: Home,
     icon: require('../components/Footer/img/btn-support.png'),
     sceneMode: 'scroll',
-    title: 'Home',
+    title: 'home',
   },
   {
     path: '/gameLog',
     component: GameLog,
     icon: require('../components/Footer/img/btn-gamelog.png'),
     sceneMode: 'scroll',
-    title: 'GameLog',
+    title: 'gameLog',
   },
   {
     path: '/downlineManagement',
     component: DownlineManagement,
     icon: require('../components/Footer/img/btn-downline.png'),
     sceneMode: 'scroll',
-    title: 'Downline',
+    title: 'downline',
   },
   {
     path: '/setting',
     component: Setting,
     icon: require('../components/Footer/img/btn-setting.png'),
     sceneMode: 'scroll',
-    title: 'Setting',
+    title: 'setting',
   },
 ];
 

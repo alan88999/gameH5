@@ -8,9 +8,11 @@ import globalStore from '@/store/global.store';
 import { getGameCategoryList, getGameList, gameEnter } from '@/services/api';
 import { formatGameId, reactClassNameJoin } from '@/utils';
 import { CategoriesMap, Hot } from './constan';
+import { useTranslation } from 'react-i18next';
 
 let timer = 0;
 const Home = () => {
+  const {t} = useTranslation();
   const { refreshUserInfo } = globalStore;
   const timerRef = useRef(0);
   const [sortDesc, setSortDesc] = useState(false);
@@ -95,7 +97,7 @@ const Home = () => {
                 }
                 alt=""
               />
-              {CategoriesMap[item.type]}
+              {t(CategoriesMap[item.type])}
             </div>
           );
         })}
@@ -103,11 +105,10 @@ const Home = () => {
     );
   };
   const renderGameList = () => {
-    console.log(categoryCurrent);
     return (
       <div className={styles.gameList}>
         <div className={styles.gameTitle}>
-          {CategoriesMap[categoryCurrent.type]} Games
+          {t(CategoriesMap[categoryCurrent.type])} {t('games')}
         </div>
         <div className={styles.gameUl}>
           {gameList.map((item: any, index: number) => {
@@ -117,7 +118,6 @@ const Home = () => {
                 className={styles.gameItem}
                 onClick={() => {
                   gameEnterReq(item.game_id);
-                  // history.push('/gamePage');
                 }}>
                 <div>
                   <img
@@ -143,7 +143,6 @@ const Home = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.left}>
-          <img className={styles.menu} src={require('./img/btn_menu.png')} />
           <img className={styles.logo} src={require('./img/logo.png')} />
         </div>
         <Balance />
@@ -156,11 +155,15 @@ const Home = () => {
                 value={searchValue}
                 onChange={(val) => setSearchValue(val)}
                 clsasName={styles.searchInput}
-                placeholder="search"
+                placeholder={t('search')}
                 icon={require('./img/icon_search.png')}
               />
             </div>
-            <div className={styles.sort}>
+            <div
+              className={styles.sort}
+              onClick={() => {
+                setSortDesc(!sortDesc);
+              }}>
               <img
                 className={styles.sortIcon}
                 src={require('./img/icon_sort.png')}
@@ -172,9 +175,6 @@ const Home = () => {
                   sortDesc ? styles.desc : '',
                 )}
                 src={require('./img/arrow_down.png')}
-                onClick={() => {
-                  setSortDesc(!sortDesc);
-                }}
               />
             </div>
           </div>

@@ -3,6 +3,7 @@ import Button from '../button';
 import { ModalProps } from 'antd-mobile';
 import styles from './index.module.less';
 import { reactClassNameJoin } from '@/utils';
+import { useTranslation } from 'react-i18next';
 
 interface Props extends ModalProps {
   content: any;
@@ -18,6 +19,7 @@ interface Props extends ModalProps {
   };
 }
 const CustoModal = (props: Props) => {
+  const {t} = useTranslation();
   const {
     footer,
     icon,
@@ -28,9 +30,9 @@ const CustoModal = (props: Props) => {
     ...rest
   } = props;
   const {
-    okText = 'Confirm',
+    okText = t('confirm'),
     onOk,
-    cancelText = 'Cancel',
+    cancelText =   t('cancel'),
     onCancel,
   } = footer || {};
   return (

@@ -10,8 +10,10 @@ import history from '@/utils/history';
 import globalStore from '@/store/global.store';
 import { Toast } from 'antd-mobile';
 import { getUrlParams } from '@/utils';
+import { useTranslation } from 'react-i18next';
 
 const Pssword = () => {
+  const { t } = useTranslation();
   const id = Number(getUrlParams('id'));
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
@@ -70,9 +72,9 @@ const Pssword = () => {
   };
   return (
     <div className={styles.container}>
-      <Header title="Change Pssword" />
+      <Header title={t('changePassword')} />
       <div className={styles.desc}>
-        Please insert your new password and confirm the password.
+        {t('changePasswordDesc')}
       </div>
       <div className={styles.form}>
         {id ? (
@@ -83,7 +85,7 @@ const Pssword = () => {
               type="password"
               value={currentPassword}
               icon={require('../Login/img/icon-password.png')}
-              placeholder="Current Password"
+              placeholder={t('currentPassword')}
               onChange={(val) => {
                 setCurrentPassword(val);
               }}
@@ -95,7 +97,7 @@ const Pssword = () => {
             value={newPassword}
             type="password"
             icon={require('../Login/img/icon-password.png')}
-            placeholder="New Password"
+            placeholder={t('newPassword')}
             onChange={(val) => {
               setNewPassword(val);
             }}
@@ -106,7 +108,7 @@ const Pssword = () => {
             value={confirmPassword}
             type="password"
             icon={require('../Login/img/icon-password.png')}
-            placeholder="Confirm Password"
+            placeholder={t('confirmPassword')}
             onChange={(val) => {
               setConfirmPassword(val);
             }}
@@ -121,14 +123,14 @@ const Pssword = () => {
           }
           className={styles.confirmBtn}
           onClick={changePasswordReq}>
-          Confirm
+          {t('confirm')}
         </Button>
         <Button
           className={styles.cancelBtn}
           onClick={() => {
             history.go(-1);
           }}>
-          Cancel
+         {t('cancel')}
         </Button>
       </div>
       <CustoModal

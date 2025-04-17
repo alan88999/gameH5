@@ -3,8 +3,10 @@ import { useLocation, matchPath } from 'react-router-dom';
 import { TabBarList } from '@/routers';
 import styles from './index.module.less';
 import { Toast } from 'antd-mobile';
+import { useTranslation } from 'react-i18next';
 
 const Footer = () => {
+  const  {t}=useTranslation();
   const location = useLocation();
   const isTabBar =
     TabBarList.findIndex((i) => i.path === location.pathname) !== -1 ||
@@ -28,7 +30,7 @@ const Footer = () => {
             history.push(path);
           }}>
           <img className={styles.icon} src={icon} />
-          <span>{title}</span>
+          <span>{t(title)}</span>
         </div>
       ))}
     </div>

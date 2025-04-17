@@ -2,12 +2,14 @@ import { DatePicker } from 'antd-mobile';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 import styles from './index.module.less';
+import { useTranslation } from 'react-i18next';
 interface Props {
   value: any;
   onChange: (val: any) => void;
 }
 
 const TimePicker = (props: Props) => {
+  const { t } = useTranslation();
   const { value, onChange } = props;
   const [visible, setVisible] = useState(false);
   return (
@@ -21,6 +23,8 @@ const TimePicker = (props: Props) => {
         />
       </div>
       <DatePicker
+        cancelText={t('cancel')}
+        confirmText={t('confirm')}
         className={styles.datePicker}
         value={value}
         visible={visible}
