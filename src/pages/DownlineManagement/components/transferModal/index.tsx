@@ -18,14 +18,15 @@ const TranferModal = (props: Props) => {
   const { isTopUp, visible, item, type, onClose, onSuccess } = props;
   const [money, setMoney] = useState('');
   const [insufficientVisible, setInsufficientVisible] = useState(false);
-  const {t}  =useTranslation();
-  useEffect(()=>{
-    if(!visible) {
-        setMoney('')
+  const { t } = useTranslation();
+  const isPlayer = type === 'player';
+  useEffect(() => {
+    if (!visible) {
+      setMoney('');
     }
-  },[visible])
+  }, [visible]);
   const tranferReq = () => {
-    if(!money) {
+    if (!money) {
       return;
     }
     Toast.show({
@@ -35,7 +36,7 @@ const TranferModal = (props: Props) => {
       user_id: item.id, // 转账的对象用户Id， transfer trage of user id.
       amount: Number(money) * 1000, // transfer real amount * 1000
       transfer_type: isTopUp ? 1 : 2, // 1 fund in 2 fund out
-      type: type === 'player' ? 1 : 2, // 1 agent to player  2. agent to agent
+      type: isPlayer ? 1 : 2, // 1 agent to player  2. agent to agent
     })
       .then((res) => {
         if (res.data.code === 200) {
@@ -61,11 +62,27 @@ const TranferModal = (props: Props) => {
   const renderContent = (item: any) => {
     return (
       <div className={styles.modalContent}>
-        <div className={styles.title}>{isTopUp ? t('topUp') : t('withdraw')}</div>
-        <div className={styles.desc}>
-          Please enter the amount that you wish to {isTopUp?'top up':'withdraw'} for downline below:
+        <div className={styles.title}>
+          {isTopUp ? (
+            <>
+              <span className={isPlayer ? styles.player : styles.agent}>
+                {isPlayer ? t('gameLower') : t('agentLower')}
+              </span>
+              {t('topUp')}
+            </>
+          ) : (
+            t('withdraw')
+          )}
         </div>
-        <div className={styles.idText}>ID: {item.id}</div>
+        <div className={styles.desc}>
+          Please enter the{' '}
+          <span className={isPlayer ? styles.player : styles.agent}>
+            {isTopUp ?isPlayer ? t('gameUpper') : t('agentUpper') :''}
+          </span>{' '}
+          amount that you wish to {isTopUp ? 'top up' : 'withdraw'} for
+          downline below:
+        </div>
+        <div className={styles.idText}>{item.username}/{item.nickname}</div>
         <div className={styles.inputContainer}>
           <div className={styles.text}>{t('BDT')}</div>
           <CustomInput

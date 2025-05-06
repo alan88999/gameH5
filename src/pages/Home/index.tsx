@@ -8,11 +8,13 @@ import globalStore from '@/store/global.store';
 import { getGameCategoryList, getGameList, gameEnter } from '@/services/api';
 import { formatGameId, reactClassNameJoin } from '@/utils';
 import { CategoriesMap, Hot } from './constan';
+import LanguagePicker from '@/components/LanguagePicker';
 import { useTranslation } from 'react-i18next';
+import i18n from '@/i18n';
 
 let timer = 0;
 const Home = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
   const { refreshUserInfo } = globalStore;
   const timerRef = useRef(0);
   const [sortDesc, setSortDesc] = useState(false);
@@ -20,6 +22,7 @@ const Home = () => {
   const [categoryCurrent, setCategoryCurrent] = useState(Hot);
   const [categoryList, setCategoryList] = useState([Hot]);
   const [gameList, setGameList] = useState<any>([]);
+  const [visible, setVisible] = useState(false);
   const gameEnterReq = (game_id: number) => {
     const loadingToast = Toast.show({
       icon: 'loading',
@@ -145,7 +148,23 @@ const Home = () => {
         <div className={styles.left}>
           <img className={styles.logo} src={require('./img/logo.png')} />
         </div>
+        <div className={styles.right}>
+
         <Balance />
+          <div
+            className={styles.languageContainer}
+            onClick={() => {
+              setVisible(true);
+            }}>
+            <img
+              src={
+                i18n.language === 'en'
+                  ? require('../Login/img/en.png')
+                  : require('../Login/img/bd.png')
+              }
+            />
+          </div>
+        </div>
       </div>
       <div className={styles.content}>
         <div className={styles.topHeader}>
@@ -182,6 +201,7 @@ const Home = () => {
         </div>
         <div className={styles.gameListConatiner}>{renderGameList()}</div>
       </div>
+      <LanguagePicker visible={visible} onCancel={() => setVisible(false)} />
     </div>
   );
 };

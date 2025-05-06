@@ -199,12 +199,12 @@ const DownlineDetail = () => {
               <Avatar userinfo={userinfo?.user_info} />
             </div>
             <div className={styles.info}>
-              <span className={styles.text}>{t('playerID')}</span>
+              <span className={styles.text}>
+                {t('playerID')}/{t('username')}
+              </span>
               <span className={styles.id}>{`${
-                userinfo?.user_info?.prefix || ''
-              }${userinfo?.user_info?.id.toString().slice(0, 8)}/${
-                userinfo?.user_info?.username
-              }`}</span>
+                userinfo?.user_info?.username || ''
+              }/${userinfo?.user_info?.nickname}`}</span>
               <span
                 className={reactClassNameJoin(
                   styles.active,
@@ -224,17 +224,37 @@ const DownlineDetail = () => {
             )}
           />
           <div className={styles.balanceContainer}>
-            <div className={styles.balanceItem}>
-              <span className={styles.text}>{t('agentCreditBalance')}</span>
-              <span className={styles.balance}>
-                {formatBalance(userinfo?.user_info?.agent_balance || 0)}
-              </span>
+            <div
+              className={reactClassNameJoin(
+                styles.balanceItem,
+                styles.balanceItemGame,
+              )}>
+              {type === 'player' ? (
+                <>
+                  <span className={styles.text}>{t('gameCreditBalance')}</span>
+                  <span className={styles.balance}>
+                    {formatBalance(userinfo?.user_info?.game_balance || 0)}
+                  </span>
+                </>
+              ) : (
+                ''
+              )}
             </div>
-            <div className={styles.balanceItem}>
-              <span className={styles.text}>{t('gameCreditBalance')}</span>
-              <span className={styles.balance}>
-                {formatBalance(userinfo?.user_info?.game_balance || 0)}
-              </span>
+            <div
+              className={reactClassNameJoin(
+                styles.balanceItem,
+                styles.balanceItemAgent,
+              )}>
+              {type === 'agent' ? (
+                <>
+                  <span className={styles.text}>{t('agentCreditBalance')}</span>
+                  <span className={styles.balance}>
+                    {formatBalance(userinfo?.user_info?.agent_balance || 0)}
+                  </span>
+                </>
+              ) : (
+                ''
+              )}
             </div>
           </div>
           <div className={styles.operate}>

@@ -1,5 +1,5 @@
 {
-    "username": "Username",
+    "username": "NickName",
     "password": "Password",
     "gameCredit": "Game Credit",
     "agentCredit": "Agent Credit",
@@ -57,7 +57,7 @@
     "addDownlineDesc":"Please insert the following details to add a new downline.",
     "phone":"Phone No.",
     "email":"Email",
-    "creditDesc":"Add Credit For New Downline",
+    "creditDesc":"Add Game Credit for New Downline",
     "BDT":"(BDT)",
     "amountDesc":"Enter Amount (BDT)",
     "sameDesc":"New Password and Confirm Password must be the same",
@@ -68,5 +68,12 @@
     "copy":"Copy",
     "copySuccess":"Copy Successfully",
     "resetSuccess":"This account has been successfully reset.",
-    "freezeSuccess":"This account has been successfully frozen."
+    "freezeSuccess":"This account has been successfully frozen.",
+    "language":"Language",
+    "en":"English",
+    "bd":"বাংলা",
+    "agentLower":"Agent Credit",
+    "agentUpper":"AGENT credit",
+    "gameLower":"Game Credit",
+    "gameUpper":"GAME credit"
 }

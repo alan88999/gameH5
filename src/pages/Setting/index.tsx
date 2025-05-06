@@ -10,10 +10,14 @@ import history from '@/utils/history';
 import { logout } from '@/services/api';
 import { Toast } from 'antd-mobile';
 import { useTranslation } from 'react-i18next';
+import LanguagePicker from '@/components/LanguagePicker';
+import i18n from '@/i18n';
 
 const Setting = () => {
   const { t } = useTranslation();
   const { refreshUserInfo, userInfo, refreshing } = globalStore;
+  const [visible, setVisible] = useState(false);
+  const [languageVisible, setLanguageVisible] = useState(false);
   const [modalProps, setModalProps] = useState<any>({
     visible: false,
     content: '',
@@ -31,16 +35,15 @@ const Setting = () => {
             ...modalProps,
             icon: require('../DownlineDetail/img/modal-logout-done.png'),
             visible: true,
-            content: 'Account Logged Out!',
-            contentDesc: 'This account has been successfully force logged out.',
+            content: t('accountloggedOut'),
+            contentDesc: t('logoutSuccess'),
           });
           setTimeout(() => {
             setModalProps({
               ...modalProps,
               visible: false,
-              content: 'Account Logged Out!',
-              contentDesc:
-                'This account has been successfully force logged out.',
+              content: t('accountloggedOut'),
+              contentDesc: t('logoutSuccess'),
             });
             history.replace('/login');
           }, 2000);
@@ -74,7 +77,7 @@ const Setting = () => {
             <div
               className={
                 styles.idText
-              }>{`${userInfo.username}/${userInfo.id}`}</div>
+              }>{`${userInfo.username}/${userInfo.nickname}`}</div>
             <div
               className={reactClassNameJoin(
                 styles.active,
@@ -124,6 +127,33 @@ const Setting = () => {
         <div
           className={styles.listItem}
           onClick={() => {
+            setLanguageVisible(true);
+          }}>
+          <div className={styles.left}>
+            <div
+              className={styles.languageContainer}>
+              <img
+                src={
+                  i18n.language === 'en'
+                    ? require('../Login/img/en.png')
+                    : require('../Login/img/bd.png')
+                }
+              />
+            </div>
+            <div className={styles.listText}>
+              {t('language')} - {t(`${i18n.language}`)}
+            </div>
+          </div>
+          <div className={styles.arrow}>
+            <img
+              src={require('../DownlineDetail/img/btn-next.png')}
+              className={styles.icon}
+            />
+          </div>
+        </div>
+        <div
+          className={styles.listItem}
+          onClick={() => {
             setModalProps({
               ...modalProps,
               icon: require('../DownlineDetail/img/modal-logout.png'),
@@ -156,6 +186,10 @@ const Setting = () => {
         </div>
       </div>
       <CustoModal {...modalProps} />
+      <LanguagePicker
+        visible={languageVisible}
+        onCancel={() => setLanguageVisible(false)}
+      />
     </div>
   );
 };

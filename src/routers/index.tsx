@@ -39,7 +39,7 @@ export const TabBarList: White.RouteTabBar[] = [
   {
     path: '/',
     component: Home,
-    icon: require('../components/Footer/img/btn-support.png'),
+    icon: require('../components/Footer/img/btn-home.png'),
     sceneMode: 'scroll',
     title: 'home',
   },

@@ -22,17 +22,15 @@ const AddUser = () => {
   });
   const [nickname, setNickname] = useState('');
   const [phone, setPhone] = useState('');
-  const [email, seEmail] = useState('');
   const [balance, setMoney] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [visible, setVisible] = useState(false);
   const { userInfo, refreshUserInfo } = globalStore;
 
   const btnActive = useMemo(() => {
-    return nickname && newPassword && confirmPassword;
-  }, [nickname, newPassword, confirmPassword]);
+    return nickname && newPassword;
+  }, [nickname, newPassword]);
 
   useEffect(() => {
     if (!userInfo?.id) {
@@ -44,19 +42,13 @@ const AddUser = () => {
     if (loading) {
       return;
     }
-    if (newPassword !== confirmPassword) {
-      Toast.show({
-        content: t('sameDesc'),
-      });
-      return;
-    }
+
     setLoading(true);
     const params: any = {
       currency_id: userInfo.currency_id,
       prefix: userInfo.prefix,
       password: newPassword,
       nickname,
-      email,
       phone,
       balance: Number(balance) * 1000,
     };
@@ -115,17 +107,7 @@ const AddUser = () => {
               }}
             />
           </div>
-          <div className={styles.inputContainer}>
-            <CustomInput
-              value={email}
-              type="text"
-              icon={require('./img/icon-phone.png')}
-              placeholder={t('email')}
-              onChange={(val) => {
-                seEmail(val);
-              }}
-            />
-          </div>
+
           <div className={styles.inputContainer}>
             <CustomInput
               value={newPassword}
@@ -135,18 +117,6 @@ const AddUser = () => {
               placeholder={t('newPassword')}
               onChange={(val) => {
                 setNewPassword(val);
-              }}
-            />
-          </div>
-          <div className={styles.inputContainer}>
-            <CustomInput
-              value={confirmPassword}
-              autoComplete="new-password"
-              type="password"
-              icon={require('../Login/img/icon-password.png')}
-              placeholder={t('confirmPassword')}
-              onChange={(val) => {
-                setConfirmPassword(val);
               }}
             />
           </div>

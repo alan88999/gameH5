@@ -5,7 +5,7 @@ import Button from '@/components/button';
 import CustomInput from '@/components/input';
 import globalStore from '@/store/global.store';
 import { useTranslation } from 'react-i18next';
-import LanguagePicker, { LanguageMap } from '@/components/LanguagePicker';
+import LanguagePicker from '@/components/LanguagePicker';
 import i18n from '@/i18n';
 
 import styles from './index.module.less';
@@ -44,20 +44,6 @@ const Login: FC = () => {
   };
   return (
     <div className={styles.container}>
-      <div
-        className={styles.languageContainer}
-        onClick={() => {
-          setVisible(true);
-        }}>
-        <img
-          src={
-            i18n.language === 'en'
-              ? require('./img/en.png')
-              : require('./img/bd.png')
-          }
-        />
-        {LanguageMap[i18n.language]}
-      </div>
       <img className={styles.logoTop} src={require('./img/logo-top.png')} />
       <img
         className={styles.logoBottom}
@@ -92,6 +78,20 @@ const Login: FC = () => {
         onClick={handleLogin}>
         {t('login')}
       </Button>
+      <div
+        className={styles.languageContainer}
+        onClick={() => {
+          setVisible(true);
+        }}>
+        <img
+          src={
+            i18n.language === 'en'
+              ? require('./img/en.png')
+              : require('./img/bd.png')
+          }
+        />
+     
+      </div>
       <LanguagePicker visible={visible} onCancel={() => setVisible(false)} />
     </div>
   );

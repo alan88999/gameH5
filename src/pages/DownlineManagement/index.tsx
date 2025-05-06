@@ -32,12 +32,17 @@ const DownlineManagement = () => {
   const renderList = () => {
     return list.map((item: any, index) => {
       return (
-        <div className={styles.listItem} key={index}>
+        <div
+          className={reactClassNameJoin(
+            styles.listItem,
+            type === 'agent' ? styles.listItemAgent : '',
+          )}
+          key={index}>
           <div className={styles.info}>
             <div className={styles.infoText}>
               <img src={require('./img/icon-id.png')} />
-              {`${item.prefix || ''}${item.id.toString().slice(0, 8)}/${
-                item.username
+              {`${item.username || ''}/${
+                item.nickname
               }`}
             </div>
             <div className={styles.infoText}>
